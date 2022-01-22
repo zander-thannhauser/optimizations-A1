@@ -1,0 +1,28 @@
+.data
+	.string      .int_wformat,            "%d\12"
+	.string    .float_wformat,            "%f\12"
+	.string     .char_wformat,            "%c\12"
+	.string   .string_wformat,            "%s\12"
+	.string      .int_rformat,               "%d"
+	.string    .float_rformat,               "%f"
+	.string     .char_rformat,               "%c"
+	.string   .string_rformat,               "%s"
+	.float     .float_const_0,               0.01
+	.global           main_fp,        4,        4
+.text
+	.frame main, 40, []
+		# old: loadI    ['main_fp'] => %vr4
+		# %er4 = main_fp
+		loadI    main_fp => %er4
+		# old: store    ['%vr0'] => %vr4
+		# %er6 = ('store', '%vr0')
+		store    %vr0 => %er6
+		# old: loadI    [-4] => %vr5
+		# %er8 = -4
+		loadI    -4 => %er8
+		# old: add      ['%vr0', '%vr5'] => %vr6
+		# %er10 = ('add', '%vr0', '%er8')
+		add      %vr0, %er8 => %er10
+	# number of instructions (original): 4
+	# number of instructions (optimized): 4
+	# optimization ratio: 100.00%
