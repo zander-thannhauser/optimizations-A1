@@ -1,7 +1,7 @@
 
 def process_data(t, p):
 	if (t.token == ".data"):
-		p.printf(".data");
+		p.printf(".data", prefix = "");
 		p.indent();
 		while True:
 			token = next(t);

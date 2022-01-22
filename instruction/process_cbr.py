@@ -15,5 +15,5 @@ def process_cbr(ins, outs, p):
 		else:
 			pass
 	else:
-		assert(not "TODO");
+		p.asm("cbr", [vn], "->", outs);
 

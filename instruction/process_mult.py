@@ -26,11 +26,19 @@ def process_mult(ins, outs, p):
 	elif rex == 1:
 		assert(not "TODO");
 	else:
-		assert(not "TODO");
-#	ex = ("mult", lvn, rvn);
-#	vn = extovn(ex);
-#	if not vn:
-#		vn = mkvn(ex);
-#		p.asm("mult", [lvn, rvn], "=>", [vn]);
-#	avrwvn(outs[0], vn);
+		ex = ("mult", lvn, rvn);
+		vn = extovn(ex);
+		if not vn:
+			vn = mkvn(ex);
+			p.asm("mult", [lvn, rvn], "=>", [vn]);
+		avrwvn(outs[0], vn);
+
+
+
+
+
+
+
+
+
 

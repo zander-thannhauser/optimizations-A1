@@ -1,4 +1,4 @@
-  .data
+.data
 	   .string     .int_wformat, "%d\12"
 	   .string   .float_wformat, "%f\12"
 	   .string    .char_wformat, "%c\12"
@@ -7,35 +7,36 @@
 	   .string   .float_rformat, "%f"
 	   .string    .char_rformat, "%c"
 	   .string  .string_rformat, "%s"
-  .text
-	  .frame main, 60  
+.text
+	.frame main, 60
 	# loadI 32 => %vr8
 	  loadI 32 => %vr4
 	# loadI 1 => %vr9
 	  loadI 1 => %vr5
 	# i2i %vr0 => %vr10
+	  i2i %vr0 => %vr6
 	# loadI -4 => %vr11
-	  loadI -4 => %vr6
+	  loadI -4 => %vr7
 	# add %vr10, %vr11 => %vr12
-	  add %vr0, %vr6 => %vr7
+	  add %vr0, %vr7 => %vr8
 	# loadI 1 => %vr9
 	# sub %vr9, %vr9 => %vr13
 	# constant-fold: 1 - 1 = 0
 	# loadI 0 => %vr13
-	  loadI 0 => %vr8
+	  loadI 0 => %vr9
 	# loadI 4 => %vr14
-	  loadI 4 => %vr9
+	  loadI 4 => %vr10
 	# mult %vr13, %vr14 => %vr15
 	# constant-fold: 0 * 4 = 0
 	# loadI 0 => %vr15
 	# sub %vr12, %vr15 => %vr16
 	# identity: X - 0 = X
 	# store %vr8 => %vr16
-	  store %vr4 => %vr7
+	  store %vr4 => %vr8
 	# loadI 11 => %vr17
-	  loadI 11 => %vr10
+	  loadI 11 => %vr11
 	# loadI 2 => %vr18
-	  loadI 2 => %vr11
+	  loadI 2 => %vr12
 	# i2i %vr0 => %vr10
 	# loadI -4 => %vr11
 	# add %vr10, %vr11 => %vr12
@@ -48,13 +49,13 @@
 	# constant-fold: 1 * 4 = 4
 	# loadI 4 => %vr20
 	# sub %vr12, %vr20 => %vr21
-	  sub %vr7, %vr9 => %vr12
+	  sub %vr8, %vr10 => %vr13
 	# store %vr17 => %vr21
-	  store %vr10 => %vr12
+	  store %vr11 => %vr13
 	# loadI 111 => %vr22
-	  loadI 111 => %vr13
+	  loadI 111 => %vr14
 	# loadI 3 => %vr23
-	  loadI 3 => %vr14
+	  loadI 3 => %vr15
 	# i2i %vr0 => %vr10
 	# loadI -4 => %vr11
 	# add %vr10, %vr11 => %vr12
@@ -66,13 +67,13 @@
 	# mult %vr24, %vr14 => %vr25
 	# constant-fold: 2 * 4 = 8
 	# loadI 8 => %vr25
-	  loadI 8 => %vr15
+	  loadI 8 => %vr16
 	# sub %vr12, %vr25 => %vr26
-	  sub %vr7, %vr15 => %vr16
+	  sub %vr8, %vr16 => %vr17
 	# store %vr22 => %vr26
-	  store %vr13 => %vr16
+	  store %vr14 => %vr17
 	# loadI 88 => %vr27
-	  loadI 88 => %vr17
+	  loadI 88 => %vr18
 	# loadI 4 => %vr14
 	# i2i %vr0 => %vr10
 	# loadI -4 => %vr11
@@ -85,14 +86,14 @@
 	# mult %vr28, %vr14 => %vr29
 	# constant-fold: 3 * 4 = 12
 	# loadI 12 => %vr29
-	  loadI 12 => %vr18
+	  loadI 12 => %vr19
 	# sub %vr12, %vr29 => %vr30
-	  sub %vr7, %vr18 => %vr19
+	  sub %vr8, %vr19 => %vr20
 	# store %vr27 => %vr30
-	  store %vr17 => %vr19
+	  store %vr18 => %vr20
 	# loadI 11 => %vr17
 	# loadI 5 => %vr31
-	  loadI 5 => %vr20
+	  loadI 5 => %vr21
 	# i2i %vr0 => %vr10
 	# loadI -4 => %vr11
 	# add %vr10, %vr11 => %vr12
@@ -104,15 +105,15 @@
 	# mult %vr32, %vr14 => %vr33
 	# constant-fold: 4 * 4 = 16
 	# loadI 16 => %vr33
-	  loadI 16 => %vr21
+	  loadI 16 => %vr22
 	# sub %vr12, %vr33 => %vr34
-	  sub %vr7, %vr21 => %vr22
+	  sub %vr8, %vr22 => %vr23
 	# store %vr17 => %vr34
-	  store %vr10 => %vr22
+	  store %vr11 => %vr23
 	# loadI 44 => %vr35
-	  loadI 44 => %vr23
+	  loadI 44 => %vr24
 	# loadI 6 => %vr36
-	  loadI 6 => %vr24
+	  loadI 6 => %vr25
 	# i2i %vr0 => %vr10
 	# loadI -4 => %vr11
 	# add %vr10, %vr11 => %vr12
@@ -124,15 +125,15 @@
 	# mult %vr37, %vr14 => %vr38
 	# constant-fold: 5 * 4 = 20
 	# loadI 20 => %vr38
-	  loadI 20 => %vr25
+	  loadI 20 => %vr26
 	# sub %vr12, %vr38 => %vr39
-	  sub %vr7, %vr25 => %vr26
+	  sub %vr8, %vr26 => %vr27
 	# store %vr35 => %vr39
-	  store %vr23 => %vr26
+	  store %vr24 => %vr27
 	# loadI 33 => %vr40
-	  loadI 33 => %vr27
+	  loadI 33 => %vr28
 	# loadI 7 => %vr41
-	  loadI 7 => %vr28
+	  loadI 7 => %vr29
 	# i2i %vr0 => %vr10
 	# loadI -4 => %vr11
 	# add %vr10, %vr11 => %vr12
@@ -144,11 +145,11 @@
 	# mult %vr42, %vr14 => %vr43
 	# constant-fold: 6 * 4 = 24
 	# loadI 24 => %vr43
-	  loadI 24 => %vr29
+	  loadI 24 => %vr30
 	# sub %vr12, %vr43 => %vr44
-	  sub %vr7, %vr29 => %vr30
+	  sub %vr8, %vr30 => %vr31
 	# store %vr40 => %vr44
-	  store %vr27 => %vr30
+	  store %vr28 => %vr31
 	# loadI 33 => %vr40
 	# loadI 8 => %vr45
 	# i2i %vr0 => %vr10
@@ -162,15 +163,15 @@
 	# mult %vr46, %vr14 => %vr47
 	# constant-fold: 7 * 4 = 28
 	# loadI 28 => %vr47
-	  loadI 28 => %vr31
+	  loadI 28 => %vr32
 	# sub %vr12, %vr47 => %vr48
-	  sub %vr7, %vr31 => %vr32
+	  sub %vr8, %vr32 => %vr33
 	# store %vr40 => %vr48
-	  store %vr27 => %vr32
+	  store %vr28 => %vr33
 	# loadI 22 => %vr49
-	  loadI 22 => %vr33
+	  loadI 22 => %vr34
 	# loadI 9 => %vr50
-	  loadI 9 => %vr34
+	  loadI 9 => %vr35
 	# i2i %vr0 => %vr10
 	# loadI -4 => %vr11
 	# add %vr10, %vr11 => %vr12
@@ -183,13 +184,13 @@
 	# constant-fold: 8 * 4 = 32
 	# loadI 32 => %vr52
 	# sub %vr12, %vr52 => %vr53
-	  sub %vr7, %vr4 => %vr35
+	  sub %vr8, %vr4 => %vr36
 	# store %vr49 => %vr53
-	  store %vr33 => %vr35
+	  store %vr34 => %vr36
 	# loadI 77 => %vr54
-	  loadI 77 => %vr36
+	  loadI 77 => %vr37
 	# loadI 10 => %vr55
-	  loadI 10 => %vr37
+	  loadI 10 => %vr38
 	# i2i %vr0 => %vr10
 	# loadI -4 => %vr11
 	# add %vr10, %vr11 => %vr12
@@ -201,13 +202,13 @@
 	# mult %vr56, %vr14 => %vr57
 	# constant-fold: 9 * 4 = 36
 	# loadI 36 => %vr57
-	  loadI 36 => %vr38
+	  loadI 36 => %vr39
 	# sub %vr12, %vr57 => %vr58
-	  sub %vr7, %vr38 => %vr39
+	  sub %vr8, %vr39 => %vr40
 	# store %vr54 => %vr58
-	  store %vr36 => %vr39
+	  store %vr37 => %vr40
 	# loadI 45 => %vr59
-	  loadI 45 => %vr40
+	  loadI 45 => %vr41
 	# loadI 11 => %vr17
 	# i2i %vr0 => %vr10
 	# loadI -4 => %vr11
@@ -220,13 +221,13 @@
 	# mult %vr60, %vr14 => %vr61
 	# constant-fold: 10 * 4 = 40
 	# loadI 40 => %vr61
-	  loadI 40 => %vr41
+	  loadI 40 => %vr42
 	# sub %vr12, %vr61 => %vr62
-	  sub %vr7, %vr41 => %vr42
+	  sub %vr8, %vr42 => %vr43
 	# store %vr59 => %vr62
-	  store %vr40 => %vr42
+	  store %vr41 => %vr43
 	# loadI 65 => %vr63
-	  loadI 65 => %vr43
+	  loadI 65 => %vr44
 	# loadI 12 => %vr64
 	# i2i %vr0 => %vr10
 	# loadI -4 => %vr11
@@ -240,13 +241,13 @@
 	# constant-fold: 11 * 4 = 44
 	# loadI 44 => %vr66
 	# sub %vr12, %vr66 => %vr67
-	  sub %vr7, %vr23 => %vr44
+	  sub %vr8, %vr24 => %vr45
 	# store %vr63 => %vr67
-	  store %vr43 => %vr44
+	  store %vr44 => %vr45
 	# loadI 76 => %vr68
-	  loadI 76 => %vr45
+	  loadI 76 => %vr46
 	# loadI 13 => %vr69
-	  loadI 13 => %vr46
+	  loadI 13 => %vr47
 	# i2i %vr0 => %vr10
 	# loadI -4 => %vr11
 	# add %vr10, %vr11 => %vr12
@@ -258,15 +259,15 @@
 	# mult %vr70, %vr14 => %vr71
 	# constant-fold: 12 * 4 = 48
 	# loadI 48 => %vr71
-	  loadI 48 => %vr47
+	  loadI 48 => %vr48
 	# sub %vr12, %vr71 => %vr72
-	  sub %vr7, %vr47 => %vr48
+	  sub %vr8, %vr48 => %vr49
 	# store %vr68 => %vr72
-	  store %vr45 => %vr48
+	  store %vr46 => %vr49
 	# loadI 87 => %vr73
-	  loadI 87 => %vr49
+	  loadI 87 => %vr50
 	# loadI 14 => %vr74
-	  loadI 14 => %vr50
+	  loadI 14 => %vr51
 	# i2i %vr0 => %vr10
 	# loadI -4 => %vr11
 	# add %vr10, %vr11 => %vr12
@@ -278,15 +279,15 @@
 	# mult %vr75, %vr14 => %vr76
 	# constant-fold: 13 * 4 = 52
 	# loadI 52 => %vr76
-	  loadI 52 => %vr51
+	  loadI 52 => %vr52
 	# sub %vr12, %vr76 => %vr77
-	  sub %vr7, %vr51 => %vr52
+	  sub %vr8, %vr52 => %vr53
 	# store %vr73 => %vr77
-	  store %vr49 => %vr52
+	  store %vr50 => %vr53
 	# loadI 34 => %vr78
-	  loadI 34 => %vr53
+	  loadI 34 => %vr54
 	# loadI 15 => %vr79
-	  loadI 15 => %vr54
+	  loadI 15 => %vr55
 	# i2i %vr0 => %vr10
 	# loadI -4 => %vr11
 	# add %vr10, %vr11 => %vr12
@@ -298,199 +299,215 @@
 	# mult %vr80, %vr14 => %vr81
 	# constant-fold: 14 * 4 = 56
 	# loadI 56 => %vr81
-	  loadI 56 => %vr55
+	  loadI 56 => %vr56
 	# sub %vr12, %vr81 => %vr82
-	  sub %vr7, %vr55 => %vr56
+	  sub %vr8, %vr56 => %vr57
 	# store %vr78 => %vr82
-	  store %vr53 => %vr56
+	  store %vr54 => %vr57
 	# loadI 1 => %vr9
 	# i2i %vr9 => %vr4
+	  i2i %vr5 => %vr58
 	# loadI 14 => %vr74
 	# comp %vr4, %vr74 => %vr83
 	# loadI -1 => %vr83
-	  loadI -1 => %vr57
+	  loadI -1 => %vr59
 	# testgt %vr83 => %vr84
 	# loadI 0 => %vr84
 	# cbr %vr84 -> .L0
-	  .L1:
-	# nop   
+	.L1:
+	# nop
 	# i2i %vr4 => %vr7
+	  i2i %vr58 => %vr60
 	# loadI 1 => %vr9
+	  loadI 1 => %vr61
 	# add %vr4, %vr9 => %vr85
-	# loadI 2 => %vr85
+	  add %vr58, %vr61 => %vr62
 	# i2i %vr85 => %vr5
+	  i2i %vr62 => %vr63
 	# loadI 15 => %vr79
+	  loadI 15 => %vr64
 	# comp %vr5, %vr79 => %vr86
-	# loadI -1 => %vr86
+	  comp %vr62, %vr64 => %vr65
 	# testgt %vr86 => %vr87
-	# loadI 0 => %vr87
+	  testgt %vr65 => %vr66
 	# cbr %vr87 -> .L2
-	  .L3:
-	# nop   
+	  cbr %vr66 -> .L2
+	.L3:
+	# nop
 	# i2i %vr0 => %vr10
+	  i2i %vr0 => %vr6
 	# loadI -4 => %vr11
+	  loadI -4 => %vr67
 	# add %vr10, %vr11 => %vr12
+	  add %vr0, %vr67 => %vr68
 	# loadI 1 => %vr9
+	  loadI 1 => %vr69
 	# sub %vr5, %vr9 => %vr88
-	# constant-fold: 2 - 1 = 1
-	# loadI 1 => %vr88
+	  sub %vr63, %vr69 => %vr70
 	# loadI 4 => %vr14
+	  loadI 4 => %vr71
 	# mult %vr88, %vr14 => %vr89
-	# constant-fold: 1 * 4 = 4
-	# loadI 4 => %vr89
+	  mult %vr70, %vr71 => %vr72
 	# sub %vr12, %vr89 => %vr90
+	  sub %vr68, %vr72 => %vr73
 	# load %vr90 => %vr91
-	  load %vr12 => %vr58
+	  load %vr73 => %vr74
 	# i2i %vr0 => %vr10
 	# loadI -4 => %vr11
 	# add %vr10, %vr11 => %vr12
 	# loadI 1 => %vr9
 	# sub %vr7, %vr9 => %vr92
-	# constant-fold: 1 - 1 = 0
-	# loadI 0 => %vr92
+	  sub %vr60, %vr69 => %vr75
 	# loadI 4 => %vr14
 	# mult %vr92, %vr14 => %vr93
-	# constant-fold: 0 * 4 = 0
-	# loadI 0 => %vr93
+	  mult %vr75, %vr71 => %vr76
 	# sub %vr12, %vr93 => %vr94
-	# identity: X - 0 = X
+	  sub %vr68, %vr76 => %vr77
 	# load %vr94 => %vr95
-	  load %vr7 => %vr59
+	  load %vr77 => %vr78
 	# comp %vr91, %vr95 => %vr96
-	  comp %vr58, %vr59 => %vr60
+	  comp %vr74, %vr78 => %vr79
 	# testlt %vr96 => %vr97
-	  testlt %vr60 => %vr61
+	  testlt %vr79 => %vr80
 	# cbrne %vr97 -> .L4
-	  cbrne %vr61 -> .L4
+	  cbrne %vr80 -> .L4
 	# i2i %vr5 => %vr7
-	  .L4:
-	# nop   
+	  i2i %vr63 => %vr60
+	.L4:
+	# nop
 	# loadI 1 => %vr9
+	  loadI 1 => %vr81
 	# add %vr5, %vr9 => %vr98
-	# loadI 3 => %vr98
+	  add %vr63, %vr81 => %vr82
 	# i2i %vr98 => %vr5
+	  i2i %vr82 => %vr63
 	# loadI 15 => %vr79
+	  loadI 15 => %vr83
 	# comp %vr5, %vr79 => %vr86
-	# loadI -1 => %vr86
+	  comp %vr82, %vr83 => %vr84
 	# testle %vr86 => %vr87
-	# loadI 1 => %vr87
+	  testle %vr84 => %vr85
 	# cbr %vr87 -> .L3
-	# jumpI  -> .L3
-	  jumpI  -> .L3
-	  .L2:
-	# nop   
+	  cbr %vr85 -> .L3
+	.L2:
+	# nop
 	# i2i %vr0 => %vr10
+	  i2i %vr0 => %vr6
 	# loadI -4 => %vr11
+	  loadI -4 => %vr86
 	# add %vr10, %vr11 => %vr12
+	  add %vr0, %vr86 => %vr87
 	# loadI 1 => %vr9
+	  loadI 1 => %vr88
 	# sub %vr4, %vr9 => %vr99
-	# constant-fold: 1 - 1 = 0
-	# loadI 0 => %vr99
+	  sub %vr58, %vr88 => %vr89
 	# loadI 4 => %vr14
+	  loadI 4 => %vr90
 	# mult %vr99, %vr14 => %vr100
-	# constant-fold: 0 * 4 = 0
-	# loadI 0 => %vr100
+	  mult %vr89, %vr90 => %vr91
 	# sub %vr12, %vr100 => %vr101
-	# identity: X - 0 = X
+	  sub %vr87, %vr91 => %vr92
 	# load %vr101 => %vr102
-	  load %vr7 => %vr62
+	  load %vr92 => %vr93
 	# i2i %vr102 => %vr6
+	  i2i %vr93 => %vr94
 	# i2i %vr0 => %vr10
 	# loadI -4 => %vr11
 	# add %vr10, %vr11 => %vr12
 	# loadI 1 => %vr9
 	# sub %vr7, %vr9 => %vr92
-	# constant-fold: 2 - 1 = 1
-	# loadI 1 => %vr92
+	  sub %vr60, %vr88 => %vr95
 	# loadI 4 => %vr14
 	# mult %vr92, %vr14 => %vr93
-	# constant-fold: 1 * 4 = 4
-	# loadI 4 => %vr93
+	  mult %vr95, %vr90 => %vr96
 	# sub %vr12, %vr93 => %vr94
+	  sub %vr87, %vr96 => %vr97
 	# load %vr94 => %vr95
-	  load %vr12 => %vr63
+	  load %vr97 => %vr98
 	# i2i %vr0 => %vr10
 	# loadI -4 => %vr11
 	# add %vr10, %vr11 => %vr12
 	# loadI 1 => %vr9
 	# sub %vr4, %vr9 => %vr99
-	# constant-fold: 1 - 1 = 0
-	# loadI 0 => %vr99
 	# loadI 4 => %vr14
 	# mult %vr99, %vr14 => %vr100
-	# constant-fold: 0 * 4 = 0
-	# loadI 0 => %vr100
 	# sub %vr12, %vr100 => %vr101
-	# identity: X - 0 = X
 	# store %vr95 => %vr101
-	  store %vr63 => %vr7
+	  store %vr98 => %vr92
 	# i2i %vr0 => %vr10
 	# loadI -4 => %vr11
 	# add %vr10, %vr11 => %vr12
 	# loadI 1 => %vr9
 	# sub %vr7, %vr9 => %vr92
-	# constant-fold: 2 - 1 = 1
-	# loadI 1 => %vr92
 	# loadI 4 => %vr14
 	# mult %vr92, %vr14 => %vr93
-	# constant-fold: 1 * 4 = 4
-	# loadI 4 => %vr93
 	# sub %vr12, %vr93 => %vr94
 	# store %vr6 => %vr94
-	  store %vr62 => %vr12
+	  store %vr93 => %vr97
 	# loadI 1 => %vr9
 	# add %vr4, %vr9 => %vr85
-	# loadI 2 => %vr85
+	  add %vr58, %vr88 => %vr99
 	# i2i %vr85 => %vr4
+	  i2i %vr99 => %vr58
 	# loadI 14 => %vr74
+	  loadI 14 => %vr100
 	# comp %vr4, %vr74 => %vr83
-	# loadI -1 => %vr83
+	  comp %vr99, %vr100 => %vr101
 	# testle %vr83 => %vr84
-	# loadI 1 => %vr84
+	  testle %vr101 => %vr102
 	# cbr %vr84 -> .L1
-	# jumpI  -> .L1
-	  jumpI  -> .L1
-	  .L0:
-	# nop   
+	  cbr %vr102 -> .L1
+	.L0:
+	# nop
 	# loadI 1 => %vr9
+	  loadI 1 => %vr103
 	# i2i %vr9 => %vr4
+	  i2i %vr103 => %vr58
 	# loadI 15 => %vr79
+	  loadI 15 => %vr104
 	# comp %vr4, %vr79 => %vr103
 	# loadI -1 => %vr103
+	  loadI -1 => %vr105
 	# testgt %vr103 => %vr104
 	# loadI 0 => %vr104
+	  loadI 0 => %vr106
 	# cbr %vr104 -> .L5
-	  .L6:
-	# nop   
+	.L6:
+	# nop
 	# i2i %vr0 => %vr10
+	  i2i %vr0 => %vr6
 	# loadI -4 => %vr11
+	  loadI -4 => %vr107
 	# add %vr10, %vr11 => %vr12
+	  add %vr0, %vr107 => %vr108
 	# loadI 1 => %vr9
+	  loadI 1 => %vr109
 	# sub %vr4, %vr9 => %vr99
-	# constant-fold: 1 - 1 = 0
-	# loadI 0 => %vr99
+	  sub %vr58, %vr109 => %vr110
 	# loadI 4 => %vr14
+	  loadI 4 => %vr111
 	# mult %vr99, %vr14 => %vr100
-	# constant-fold: 0 * 4 = 0
-	# loadI 0 => %vr100
+	  mult %vr110, %vr111 => %vr112
 	# sub %vr12, %vr100 => %vr101
-	# identity: X - 0 = X
+	  sub %vr108, %vr112 => %vr113
 	# load %vr101 => %vr102
-	  load %vr7 => %vr64
-	# iwrite %vr102  
-	  iwrite %vr64  
+	  load %vr113 => %vr114
+	# iwrite %vr102
+	  iwrite %vr114
 	# loadI 1 => %vr9
 	# add %vr4, %vr9 => %vr85
-	# loadI 2 => %vr85
+	  add %vr58, %vr109 => %vr115
 	# i2i %vr85 => %vr4
+	  i2i %vr115 => %vr58
 	# loadI 15 => %vr79
+	  loadI 15 => %vr116
 	# comp %vr4, %vr79 => %vr103
-	# loadI -1 => %vr103
+	  comp %vr115, %vr116 => %vr117
 	# testle %vr103 => %vr104
-	# loadI 1 => %vr104
+	  testle %vr117 => %vr118
 	# cbr %vr104 -> .L6
-	# jumpI  -> .L6
-	  jumpI  -> .L6
-	  .L5:
-	# nop   
-	# ret   
+	  cbr %vr118 -> .L6
+	.L5:
+	# nop
+	# ret
+	  ret

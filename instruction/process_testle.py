@@ -1,5 +1,5 @@
 
-from lookup import vrtovn, vntoex;
+from lookup import vrtovn, vntoex, extovn, mkvn, avrwvn;
 
 from .process_loadI import process_loadI;
 

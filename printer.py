@@ -21,13 +21,18 @@ class printer:
 		self.print(fmt % args, prefix);
 	
 	def asm(self, cmd, ins = [], arrow = "", outs = [], prefix = "  "):
-		self.print(cmd + \
-			" " + ", ".join(ins) + \
-			" " + arrow + \
-			" " + ", ".join(outs), prefix = prefix);
+		line = cmd;
+		if ins:
+			line += " " + ", ".join(ins);
+		if arrow:
+			line += " " + arrow;
+		if outs:
+			line += " " + ", ".join(outs);
+		self.print(line, prefix = prefix);
 	
 	def casm(self, cmd, ins = [], arrow = "", outs = []):
 		self.asm(cmd, ins, arrow, outs, prefix = "# ");
+
 
 
 
