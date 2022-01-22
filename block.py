@@ -1,5 +1,6 @@
 
 from stdio import printf;
+from lookup import new_block_numbering;
 
 # Integer Arithmetic Instructions:
 from instruction.process_i2i      import process_i2i;
@@ -169,6 +170,7 @@ lookup = {
 }
 
 def process_block(t, p):
+	new_block_numbering();
 	while t.token in lookup:
 		ins = []
 		outs = []

@@ -3,12 +3,15 @@ from stdio import printf;
 
 from block import process_block;
 
+from lookup import new_frame_numbering;
+
 def process_text(t, p):
 	if (t.token == ".text"):
 		p.printf(".text");
 		t.next();
 		p.indent();
 		while (t.token == ".frame"):
+			new_frame_numbering();
 			name = next(t);
 			assert(next(t) == ',');
 			framesize = next(t);

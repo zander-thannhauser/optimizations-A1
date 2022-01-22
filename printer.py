@@ -11,6 +11,7 @@ class printer:
 		self.identation -= 1;
 	
 	def print(self, string, prefix):
+		print("out: " + prefix + string);
 		self.file.write("\t" * self.identation + prefix + string + "\n");
 		
 	def comment(self, fmt, *args):
