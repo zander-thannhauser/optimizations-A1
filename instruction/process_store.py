@@ -1,5 +1,5 @@
 
-from lookup import vrtovn, vntoex;
+from lookup import vrtovn, vntoex, apexwvn;
 
 # store vr1 -> vr2 | MEMORY(vr2) <- vr1
 

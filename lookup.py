@@ -58,7 +58,8 @@ def pextovn(pex):
 	return retval;
 
 def apexwvn(pex, vn):
-	assert(not "TODO");
+	printf("apexwvn(pex = %s, vn = %s);\n", pex, vn);
+	pextovn_lookup[pex] = vn;
 
 def vrtogvn(vr):
 	global register_counter;

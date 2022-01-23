@@ -36,12 +36,6 @@ def process_mult(ops, ins, outs):
 		# a * (addI  X, b) => addI (multI X, a), (a * b)
 		case (a, ("addI", X, b)) if type(a) is int:
 			assert(not "TODO");
-		# (subI  X, a) * b => subI (multI X, b), (a * b)
-		case (("subI", X, a), b) if type(b) is int:
-			assert(not "TODO");
-		# a * (subI  X, b) => subI (multI X, a), (a * b)
-		case (a, ("subI", X, b)) if type(a) is int:
-			assert(not "TODO");
 		# (multI X, a) * b => multI X, (a * b)
 		case (("multI", X, a), b) if type(b) is int:
 			assert(not "TODO");

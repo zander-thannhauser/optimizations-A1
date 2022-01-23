@@ -34,30 +34,19 @@ def process_sub(ops, ins, outs):
 				assert(not "TODO");
 			else:
 				consider(ops, ("addI", X, a - b), out);
-		# (subI X, a) - b => subI X, (b + a)
-		case (("subI", X, a), b) if type(b) is int:
-			assert(not "TODO");
 		
 		# (add X, Y) - Y => X
 		case (("add", X, Y), Z) if Y == Z:
 			assert(not "TODO");
 		
-		# (addI X, a) - (addI Y, b) => subI (sub X, Y), -(+ a - b)
+		# (addI X, a) - (addI Y, b) => addI (add X, Y), (- a - b)
 		case (("addI", X, a), ("addI", Y, b)):
 			assert(not "TODO");
-		# (addI X, a) - (subI Y, b) => subI (sub X, Y), -(+ a + b)
-		case (("addI", X, a), ("subI", Y, b)):
-			assert(not "TODO");
-		# (subI X, a) - (addI Y, b) => subI (sub X, Y), -(- a - b)
-		case (("subI", X, a), ("addI", Y, b)):
-			assert(not "TODO");
-		# (subI X, a) - (subI Y, b) => subI (sub X, Y), -(- a + b)
-		case (("subI", X, a), ("subI", Y, b)):
-			assert(not "TODO");
 		
-		# X - c => subI X, c
+		# X - c => addI X, -c
 		case (X, c) if type(c) is int:
 			assert(not "TODO");
+		
 		# default:
 		case (_, _):
 			assert(not "TODO");

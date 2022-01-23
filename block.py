@@ -227,10 +227,10 @@ def process_block(t, p):
 			for i in operation[1]:
 				if type(i) is str:
 					vns.add(i);
-			print("kept");
+			# print("kept");
 		else:
 			prefix = "# "
-			print("skipped");
+			# print("skipped");
 		
 		# print(prefix, operation);
 		outgoing_operations.insert(0, (prefix, operation))

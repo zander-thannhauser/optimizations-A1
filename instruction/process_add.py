@@ -33,41 +33,15 @@ def process_add(ops, ins, outs):
 		# a + (addI X, b) => addI X, (a + b)
 		case (a, ("addI", X, b)) if type(a) is int:
 			assert(not "TODO");
-		# (subI X, a) + b => addI X, (b - a)
-		case (("subI", vrX, a), b) if type(b) is int:
-			assert(not "TODO");
-		# a + (subI X, b) => addI X, (a - b)
-		case (a, ("subI", vrX, b)) if type(a) is int:
-			assert(not "TODO");
-		
 		# (sub X, Y) + Y => X
 		case (("sub", X, Y), Z) if Y == Z:
 			assert(not "TODO");
 		# X + (sub Y, X) => Y
 		case (X, ("sub", Y, Z)) if Z == Z:
 			assert(not "TODO");
-		
 		# (addI X, a) + (addI, Y, b) => addI (add X, Y), (a + b)
 		case (("addI", X, a), ("addI", Y, b)):
 			if a + b == 0:
-				assert(not "TODO");
-			else:
-				assert(not "TODO");
-		# (addI X, a) + (subI, Y, b) => addI (add X, Y), (a - b)
-		case (("addI", X, a), ("subI", Y, b)):
-			if a - b == 0:
-				assert(not "TODO");
-			else:
-				assert(not "TODO");
-		# (subI X, a) + (addI, Y, b) => addI (add X, Y), (b - a)
-		case (("subI", X, a), ("addI", Y, b)):
-			if b - a == 0:
-				assert(not "TODO");
-			else:
-				assert(not "TODO");
-		# (subI X, a) + (subI, Y, b) => addI (add X, Y), (- a - b)
-		case (("subI", X, a), ("subI", Y, b)):
-			if - a - b == 0:
 				assert(not "TODO");
 			else:
 				assert(not "TODO");
