@@ -24,5 +24,7 @@ def process_store(ops, ins, outs):
 		
 		# default:
 		case _:
-			assert(not "TODO");
 			# ops.append("store", [ivn], "=>", [ovn]);
+			assert(not "TODO");
+	
+	apexwvn(ovn, ivn);

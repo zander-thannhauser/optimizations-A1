@@ -10,6 +10,8 @@ vrtolvn_lookup = {};
 
 vrtogvn_lookup = {};
 
+pextovn_lookup = {};
+
 def new_frame_numbering(args = []):
 	global register_counter;
 	register_counter = 0;
@@ -22,6 +24,7 @@ def new_block_numbering():
 	extovn_lookup = {};
 	vntoex_lookup = {};
 	vrtolvn_lookup = {k: v for k, v in vrtogvn_lookup.items()};
+	pextovn_lookup = {};
 
 def extovn(ex):
 	retval = extovn_lookup.get(ex, None);
@@ -48,6 +51,14 @@ def vrtovn(vr):
 	retval = vrtolvn_lookup[vr];
 	printf("vrtovn(vr = %s) -> %s\n", vr, retval);
 	return retval;
+
+def pextovn(pex):
+	retval = pextovn_lookup.get(vn, None);
+	printf("pextovn(pex = %s) -> %s\n", pex, retval);
+	return retval;
+
+def apexwvn(pex, vn):
+	assert(not "TODO");
 
 def vrtogvn(vr):
 	global register_counter;
