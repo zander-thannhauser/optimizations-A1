@@ -3,11 +3,8 @@ from stdio import printf;
 
 from lookup import extovn, mkvn, avrwvn;
 
-# might be given an actual int from being called
-# from other functions.
-
-def process_loadI(ins, outs, p):
-	p.casm("loadI", [str(ins[0])], "=>", outs);
+def process_loadI(ops, ins, outs):
+	# p.casm("loadI", [str(ins[0])], "=>", outs);
 	
 	literal = int(ins[0]);
 	
@@ -15,7 +12,7 @@ def process_loadI(ins, outs, p):
 	
 	if not vn:
 		vn = mkvn(literal);
-		p.asm("loadI", [str(ins[0])], "=>", [vn]);
+		ops.append(("loadI", [literal], "=>", [vn]));
 	
 	avrwvn(outs[0], vn);
-	
+

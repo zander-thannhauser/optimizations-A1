@@ -1,4 +1,4 @@
 
-def process_addI(ins, outs, p):
+def process_addI(ops, ins, outs):
 	assert(not "TODO");
 

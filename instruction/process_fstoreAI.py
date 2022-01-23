@@ -1,5 +1,5 @@
 
-def process_fstoreAI(ins, outs, p):
+def process_fstoreAI(ops, ins, outs):
 	p.casm("fstoreAI", ins, "=>", outs);
 	assert(not "TODO");
 

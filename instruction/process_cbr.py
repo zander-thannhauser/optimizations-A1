@@ -3,17 +3,21 @@ from lookup import vrtovn, vntoex;
 
 from .process_jumpI import process_jumpI;
 
-def process_cbr(ins, outs, p):
-	p.casm("cbr", ins, "->", outs);
+def process_cbr(ops, ins, outs):
+	# p.casm("cbr", ins, "->", outs);
 	
 	vn = vrtovn(ins[0]);
-	ex = vntoex(vn);
 	
-	if type(ex) is int:
-		if ex:
-			process_jumpI([], outs, p);
-		else:
-			pass
-	else:
-		p.asm("cbr", [vn], "->", outs);
+	match (vntoex(vn)):
+		# constant-folding:
+		case c if type(c) is int:
+			if c:
+				process_jumpI(ops, [], outs);
+		# default:
+		case _:
+			assert(not "TODO");
+	
+#	if type(ex) is int:
+#	else:
+#		p.asm("cbr", [vn], "->", outs);
 

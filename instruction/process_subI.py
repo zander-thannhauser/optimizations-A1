@@ -1,4 +1,4 @@
 
-def process_subI(ins, outs, p):
+def process_subI(ops, ins, outs):
 	assert(not "TODO");
 

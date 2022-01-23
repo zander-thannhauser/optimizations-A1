@@ -1,4 +1,4 @@
 
-def process_mod(ins, outs, p):
+def process_mod(ops, ins, outs):
 	assert(not "TODO");
 

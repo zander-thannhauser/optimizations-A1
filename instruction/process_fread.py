@@ -1,5 +1,5 @@
 
-def process_fread(ins, outs, p):
+def process_fread(ops, ins, outs):
 	p.casm("fread", ins, "=>", outs);
 	assert(not "TODO");
 

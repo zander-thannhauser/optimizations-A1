@@ -1,5 +1,5 @@
 
-def process_fwrite(ins, outs, p):
+def process_fwrite(ops, ins, outs):
 	p.casm("fwrite", ins, "=>", outs);
 	assert(not "TODO");
 

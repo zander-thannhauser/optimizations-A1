@@ -1,5 +1,4 @@
 
-def process_lshift(ins, outs, p):
-	assert(not "TODO");
+def process_lshift(ops, ins, outs):
 	assert(not "TODO");
 

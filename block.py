@@ -1,6 +1,7 @@
 
 from stdio import printf;
-from lookup import new_block_numbering;
+
+from lookup import new_block_numbering, vrtogvn_lookup;
 
 # Integer Arithmetic Instructions:
 from instruction.process_i2i      import process_i2i;
@@ -171,6 +172,11 @@ lookup = {
 
 def process_block(t, p):
 	new_block_numbering();
+	
+	# (cmd[, ins[, arrow[, outs]])
+	
+	operations = []
+	
 	while t.token in lookup:
 		ins = []
 		outs = []
@@ -194,7 +200,57 @@ def process_block(t, p):
 					t.next();
 					outs.append(t.token);
 					t.next();
-		lookup[operation](ins, outs, p);
+		print(operation, ins, outs);
+		lookup[operation](operations, ins, outs);
+	
+	#for o in operations:
+	#	print(o);
+	
+	vns = set();
+	
+	# (prefix, operation)
+	outgoing_operations = []
+	
+	for operation in operations[::-1]:
+		# print(operation);
+		# print(vns);
+		# if your arrow is a '->': you stay
+		# or if any of your outs is in vrtogvn.values(): you stay
+		# or if one of your outs is in list of used value numbers: you stay
+		if False \
+			or operation[2] == "->" \
+			or any(out in vrtogvn_lookup.values() for out in operation[3]) \
+			or any(out in vns for out in operation[3]):
+			prefix = "  "
+			
+			# all of your ins (that are strings) are added to vns:
+			for i in operation[1]:
+				if type(i) is str:
+					vns.add(i);
+			print("kept");
+		else:
+			prefix = "# "
+			print("skipped");
+		
+		# print(prefix, operation);
+		outgoing_operations.insert(0, (prefix, operation))
+	
+	for o in outgoing_operations:
+		p.asm(*o[1], prefix = o[0]);
+	
+	assert(not "CHECK");
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

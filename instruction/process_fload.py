@@ -1,5 +1,5 @@
 
-def process_fload(ins, outs, p):
+def process_fload(ops, ins, outs):
 	p.casm("fload", ins, "=>", outs);
 	assert(not "TODO");
 

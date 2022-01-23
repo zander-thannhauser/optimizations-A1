@@ -1,14 +1,16 @@
 
 from lookup import vntoex, vrtovn
 
-def process_cbrne(ins, outs, p):
+def process_cbrne(ops, ins, outs):
 	p.casm("cbrne", ins, "->", outs);
 	
-	ivn = vrtovn(ins[0])
-	iex = vntoex(ivn)
+	assert(not "TODO");
 	
-	if type(ivn) is int:
-		assert(not "TODO");
-	else:
-		p.asm("cbrne", [ivn], "->", outs);
+#	ivn = vrtovn(ins[0])
+#	iex = vntoex(ivn)
+#	
+#	if type(ivn) is int:
+#		assert(not "TODO");
+#	else:
+#		p.asm("cbrne", [ivn], "->", outs);
 

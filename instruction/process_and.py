@@ -1,4 +1,4 @@
 
-def process_and(ins, outs, p):
+def process_and(ops, ins, outs):
 	assert(not "TODO");
 

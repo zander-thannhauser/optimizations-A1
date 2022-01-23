@@ -1,5 +1,5 @@
 
-def process_testge(ins, outs, p):
+def process_testge(ops, ins, outs):
 	p.casm("testge", ins, "=>", outs);
 	assert(not "TODO");
 

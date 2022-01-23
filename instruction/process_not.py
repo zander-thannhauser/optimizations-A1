@@ -1,4 +1,4 @@
 
-def process_not(ins, outs, p):
+def process_not(ops, ins, outs):
 	assert(not "TODO");
 

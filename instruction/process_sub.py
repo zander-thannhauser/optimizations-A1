@@ -5,27 +5,80 @@ from lookup import vrtovn, extovn, mkvn, avrwvn, vntoex;
 
 from .process_loadI import process_loadI;
 
-# identities:
-# X - 0 = X
-# X - X = 0
+from .common import consider;
 
-def process_sub(ins, outs, p):
-	p.casm("sub", ins, "=>", outs);
-	lvn, rvn = vrtovn(ins[0]), vrtovn(ins[1])
-	lex, rex = vntoex(lvn), vntoex(rvn);
+def process_sub(ops, ins, outs):
+	# p.casm("sub", ins, "=>", outs);
 	
-	if type(lex) is int and type(rex) is int:
-		p.comment("constant-fold: %i - %i = %i", lex, rex, lex - rex);
-		process_loadI([lex - rex], outs, p);
-	elif rex == 0:
-		p.comment("identity: X - 0 = X");
-		avrwvn(outs[0], lvn);
-	elif lex == rex:
-		assert(not "TODO");
-	else:
-		ex = ("sub", lvn, rvn);
-		vn = extovn(ex);
-		if not vn:
-			vn = mkvn(ex);
-			p.asm("sub", [lvn, rvn], "=>", [vn]);
-		avrwvn(outs[0], vn);
+	lvn, rvn = vrtovn(ins[0]), vrtovn(ins[1])
+	
+	out = outs[0];
+	
+	match (vntoex(lvn), vntoex(rvn)):
+		# constant-folding:
+		case (lex, rex) if type(lex) is int and type(rex) is int:
+			process_loadI(ops, [lex - rex], outs);
+		
+		# identities:
+		# X - 0 = X
+		case (X, 0):
+			avrwvn(out, lvn);
+		# X - X = 0
+		case (X, Y) if X == Y:
+			assert(not "TODO");
+		
+		# substitutions:
+		# (addI X, a) - b => addI X, (a - b)
+		case (("addI", X, a), b) if type(b) is int:
+			if (b == a):
+				assert(not "TODO");
+			else:
+				consider(ops, ("addI", X, a - b), out);
+		# (subI X, a) - b => subI X, (b + a)
+		case (("subI", X, a), b) if type(b) is int:
+			assert(not "TODO");
+		
+		# (add X, Y) - Y => X
+		case (("add", X, Y), Z) if Y == Z:
+			assert(not "TODO");
+		
+		# (addI X, a) - (addI Y, b) => subI (sub X, Y), -(+ a - b)
+		case (("addI", X, a), ("addI", Y, b)):
+			assert(not "TODO");
+		# (addI X, a) - (subI Y, b) => subI (sub X, Y), -(+ a + b)
+		case (("addI", X, a), ("subI", Y, b)):
+			assert(not "TODO");
+		# (subI X, a) - (addI Y, b) => subI (sub X, Y), -(- a - b)
+		case (("subI", X, a), ("addI", Y, b)):
+			assert(not "TODO");
+		# (subI X, a) - (subI Y, b) => subI (sub X, Y), -(- a + b)
+		case (("subI", X, a), ("subI", Y, b)):
+			assert(not "TODO");
+		
+		# X - c => subI X, c
+		case (X, c) if type(c) is int:
+			assert(not "TODO");
+		# default:
+		case (_, _):
+			assert(not "TODO");
+	
+#		ex = ("sub", lvn, rvn);
+#		vn = extovn(ex);
+#		if not vn:
+#			vn = mkvn(ex);
+#			p.asm("sub", [lvn, rvn], "=>", [vn]);
+#		avrwvn(out, vn);
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,5 +1,5 @@
 
-def process_floadAI(ins, outs, p):
+def process_floadAI(ops, ins, outs):
 	p.casm("floadAI", ins, "=>", outs);
 	assert(not "TODO");
 

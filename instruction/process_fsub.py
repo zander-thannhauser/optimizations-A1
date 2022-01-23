@@ -1,5 +1,5 @@
 
-def process_fsub(ins, outs, p):
+def process_fsub(ops, ins, outs):
 	p.casm("fsub", ins, "=>", outs);
 	assert(not "TODO");
 

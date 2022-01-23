@@ -1,5 +1,5 @@
 
-def process_iread(ins, outs, p):
+def process_iread(ops, ins, outs):
 	p.casm("iread", ins, "=>", outs);
 	assert(not "TODO");
 
