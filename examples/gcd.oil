@@ -21,11 +21,11 @@
 	  loadAI %vr0, -4 => %vr9
 	  loadI 0 => %vr10
 	# comp %vr9, %vr10 => %vr11
-	  cmp_NE %vr9, %vr10 => %vr12
+	# cmp_NE %vr9, %vr10 => %vr12
 	  loadAI %vr0, -8 => %vr13
 	# comp %vr13, %vr10 => %vr14
-	  cmp_NE %vr13, %vr10 => %vr15
-	  or %vr12, %vr15 => %vr16
+	# cmp_NE %vr13, %vr10 => %vr15
+	  or %vr9, %vr13 => %vr16
 	# comp %vr16, %vr10 => %vr17
 	# cmp_EQ %vr16, %vr10 => %vr18
 	  cbr_EQ %vr16, %vr10 -> .L0
@@ -43,13 +43,13 @@
 	  addI %vr0, -8 => %vr27
 	  iread %vr27
 	  loadAI %vr0, -4 => %vr28
-	  loadI 0 => %vr29
+	# loadI 0 => %vr29
 	# comp %vr28, %vr29 => %vr30
-	  cmp_NE %vr28, %vr29 => %vr31
+	# cmp_NE %vr28, %vr29 => %vr31
 	  loadAI %vr0, -8 => %vr32
 	# comp %vr32, %vr29 => %vr33
-	  cmp_NE %vr32, %vr29 => %vr34
-	  or %vr31, %vr34 => %vr35
+	# cmp_NE %vr32, %vr29 => %vr34
+	  or %vr28, %vr32 => %vr35
 	  cbr %vr35 -> .L1
 	.L0:
 	  ret

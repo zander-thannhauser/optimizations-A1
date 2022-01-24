@@ -95,13 +95,15 @@ def incgvn(gvn):
 	print("gvn_vers:", gvn_vers);
 
 def oldgvn(gvn):
+	retval = False;
 	if type(gvn) is not str:
-		return False;
-	if ":" in gvn:
+		retval = False;
+	elif ":" in gvn:
 		xs = gvn.split(":");
 		if gvn_vers[xs[0]] != int(xs[1]):
-			return True;
-	return False;
+			retval = True;
+	printf("oldgvn(gvn = %s) -> %s;\n", gvn, str(retval));
+	return retval;
 
 def avrwvn(vr, vn):
 	printf("avrwsr(vr = %s, vn = %s);\n", vr, vn);
