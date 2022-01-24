@@ -75,6 +75,19 @@ path/to/python3.10 ./main.py ./examples/qs.il
 path/to/python3.10 ./main.py ./examples/while_array.il
 ```
 
+To run my interpreter/emulator on the results:
+
+```
+./path/to/interpreter -si ./examples/arrayparam.oil
+./path/to/interpreter -si ./examples/bubble.oil
+./path/to/interpreter -si ./examples/check.oil
+./path/to/interpreter -si ./examples/dynamic.oil
+./path/to/interpreter -si ./examples/fib.oil
+./path/to/interpreter -si ./examples/gcd.oil
+./path/to/interpreter -si ./examples/newdyn.oil
+./path/to/interpreter -si ./examples/qs.oil
+./path/to/interpreter -si ./examples/while_array.oil
+```
 
 
 
