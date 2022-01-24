@@ -10,6 +10,8 @@ def process_mult(ops, ins, outs):
 	
 	lvn, rvn = vrtovn(ins[0]), vrtovn(ins[1])
 	
+	out = outs[0];
+	
 	match (vntoex(lvn), vntoex(rvn)):
 		# constant-folding:
 		case (lex, rex) if type(lex) is int and type(rex) is int:
@@ -17,22 +19,23 @@ def process_mult(ops, ins, outs):
 			
 		# identities:
 		# 0 * X = 0
-		case (0, X):
+		case (0, _):
 			assert(not "TODO");
 		# 1 * X = X
-		case (1, X):
+		case (1, _):
 			assert(not "TODO");
 		# X * 0 = 0
-		case (X, 0):
+		case (_, 0):
 			assert(not "TODO");
 		# X * 1 = X
-		case (X, 1):
+		case (_, 1):
 			assert(not "TODO");
 		
 		# substitutions:
 		# (addI  X, a) * b => addI (multI X, b), (a * b)
 		case (("addI", X, a), b) if type(b) is int:
-			assert(not "TODO");
+			subvn = consider(ops, ("multI", X, b));
+			consider(ops, ("addI", subvn, a * b), out);
 		# a * (addI  X, b) => addI (multI X, a), (a * b)
 		case (a, ("addI", X, b)) if type(a) is int:
 			assert(not "TODO");
@@ -43,11 +46,15 @@ def process_mult(ops, ins, outs):
 		case (a, ("multI", X, b)) if type(a) is int:
 			assert(not "TODO");
 		
+		# (multI X, a) * (multI Y, b) => multI (mult X Y), (a * b)
+		case (("multI", X, a), ("multI", Y, b)):
+			assert(not "TODO");
+		
 		# mult X, c => multI X, c:
-		case (X, c) if type(c) is int:
+		case (_, c) if type(c) is int:
 			assert(not "TODO");
 		# mult c, X => multI X, c:
-		case (c, X) if type(c) is int:
+		case (c, _) if type(c) is int:
 			assert(not "TODO");
 		# default:
 		case (lex, rex):

@@ -1,3 +1,4 @@
+# vim: set noai ts=8 sw=8:
 PROGRAM bubble;
 
  VAR a:ARRAY[1..15] OF INTEGER;
@@ -20,26 +21,42 @@ BEGIN
 	a[14] := 87;
 	a[15] := 34;
 	
-	i := 1;
+	i := 1; // %vr4
 	
 	WHILE i<=14 DO BEGIN
-          least := i;
-	  j := i + 1;
-	  WHILE j<=15 DO BEGIN
-            IF a[j] < a[least] THEN 
-              least := j;
-	    j := j + 1 
-	  END;
-          t := a[i];
-          a[i] := a[least];
-          a[least] := t;
-          i:= i + 1
+		// .L1
+		least := i;
+		j := i + 1; // %vr5
+		WHILE j<=15 DO BEGIN
+			// .L3
+			IF a[j] < a[least] THEN least := j;
+			// .L4
+			j := j + 1
+		END;
+		// .L2
+		t := a[i];
+		a[i] := a[least];
+		a[least] := t;
+		i:= i + 1
 	END;
-
+	
+	// .L0 (assign + if)
 	i := 1;
 	WHILE i<=15 DO BEGIN
-          WRITE(a[i]);
-	  i := i + 1
-        END
-      
+		// .L6 (write + add + assign)
+		WRITE(a[i]);
+		i := i + 1
+	END
+	// .L5
 END
+
+
+
+
+
+
+
+
+
+
+

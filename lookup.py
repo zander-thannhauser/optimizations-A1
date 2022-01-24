@@ -53,7 +53,7 @@ def vrtovn(vr):
 	return retval;
 
 def pextovn(pex):
-	retval = pextovn_lookup.get(vn, None);
+	retval = pextovn_lookup.get(pex, None);
 	printf("pextovn(pex = %s) -> %s\n", pex, retval);
 	return retval;
 

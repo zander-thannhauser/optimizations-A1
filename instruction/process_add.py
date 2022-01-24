@@ -20,15 +20,15 @@ def process_add(ops, ins, outs):
 		
 		# identities:
 		# 0 + X = X
-		case (0, X):
+		case (0, _):
 			assert(not "TODO");
 		# X + 0 = X
-		case (X, 0):
+		case (_, 0):
 			assert(not "TODO");
 		
 		# substitutions:
 		# (addI X, a) + b => addI X, (a + b)
-		case (("addI", vrX, a), b) if type(b) is int:
+		case (("addI", X, a), b) if type(b) is int:
 			assert(not "TODO");
 		# a + (addI X, b) => addI X, (a + b)
 		case (a, ("addI", X, b)) if type(a) is int:
@@ -45,6 +45,10 @@ def process_add(ops, ins, outs):
 				assert(not "TODO");
 			else:
 				assert(not "TODO");
+		
+		# (multI X, a) + (multI Y, a) = multI (add X, Y), a
+		case (("multI", X, a), ("multI", Y, b)) if a == b:
+			assert(not "TODO");
 		
 		# X + c => addI X, c
 		case (lex, rex) if type(rex) is int:

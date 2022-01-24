@@ -1,5 +1,5 @@
 
 def process_ret(ops, ins, outs):
-	p.casm("ret");
-	p.asm("ret");
+	# p.casm("ret");
+	ops.append(("ret", ));
 

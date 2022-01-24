@@ -21,10 +21,10 @@ def process_sub(ops, ins, outs):
 		
 		# identities:
 		# X - 0 = X
-		case (X, 0):
+		case (_, 0):
 			avrwvn(out, lvn);
 		# X - X = 0
-		case (X, Y) if X == Y:
+		case (_, _) if lvn == rvn:
 			assert(not "TODO");
 		
 		# substitutions:
@@ -39,13 +39,23 @@ def process_sub(ops, ins, outs):
 		case (("add", X, Y), Z) if Y == Z:
 			assert(not "TODO");
 		
-		# (addI X, a) - (addI Y, b) => addI (add X, Y), (- a - b)
+		# (addI X, a) - (addI Y, b) => addI (sub X, Y), (+ a - b)
 		case (("addI", X, a), ("addI", Y, b)):
+			if X == Y:
+				assert(not "TODO");
+			elif a == b:
+				consider(ops, ("sub", X, Y), out);
+			else:
+				subvn = consider(ops, ("sub", X, Y));
+				consider(ops, ("addI", subvn, a - b), out);
+		
+		# (multI X, a) - (multI Y, a) = multI (sub X, Y), a
+		case (("multI", X, a), ("multI", Y, b)) if a == b:
 			assert(not "TODO");
 		
 		# X - c => addI X, -c
-		case (X, c) if type(c) is int:
-			assert(not "TODO");
+		case (_, c) if type(c) is int:
+			consider(ops, ("addI", lvn, -c), out);
 		
 		# default:
 		case (_, _):

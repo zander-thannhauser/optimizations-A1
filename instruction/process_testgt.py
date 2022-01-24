@@ -3,10 +3,14 @@ from lookup import vrtovn, vntoex, extovn, mkvn, avrwvn;
 
 from .process_loadI import process_loadI;
 
+from .common import consider;
+
 def process_testgt(ops, ins, outs):
 	# p.casm("testgt", ins, "=>", outs);
 	
 	ivn = vrtovn(ins[0]);
+	
+	out = outs[0];
 	
 	match (vntoex(ivn)):
 		# constant-fold:
@@ -15,7 +19,7 @@ def process_testgt(ops, ins, outs):
 		
 		# substitutions:
 		case ("comp", X, Y):
-			assert(not "TODO");
+			consider(ops, ("cmp_GT", X, Y), out);
 		
 		# default:
 		case (iex):
