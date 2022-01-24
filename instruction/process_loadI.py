@@ -14,5 +14,7 @@ def process_loadI(ops, ins, outs):
 		vn = mkvn(literal);
 		ops.append(("loadI", [literal], "=>", [vn]));
 	
-	avrwvn(outs[0], vn);
+	if outs is not None:
+		avrwvn(outs[0], vn);
+	return vn;
 
