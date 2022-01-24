@@ -3,7 +3,7 @@
 
 ## Carr's Numbers:
 | File             | Original | Opt.Time | Carr's LVN | Opt. # Inst. |
-|  -               |        - |          |          - |            - |
+|  :--             |      --: |      --: |        --: |          --: |
 | `arrayparam.il`  |      841 | 0m0.072s |        487 |          375 |
 | `bubble.il`      |     4374 | 0m0.076s |       2855 |         1444 |
 | `check.il`       |      140 | 0m0.031s |        130 |           64 |
