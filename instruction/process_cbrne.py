@@ -1,5 +1,5 @@
 
-from lookup import vntoex, vrtovn, vrtogvn_lookup;
+from lookup import vntoex, vrtovn, oldgvn;
 
 def process_cbrne(ops, ins, outs):
 	# p.casm("cbrne", ins, "->", outs);
@@ -12,8 +12,7 @@ def process_cbrne(ops, ins, outs):
 		
 		case ("cmp_LT", X, Y):
 			# check for using a move instruction's result
-			if     (X != "%vr0" and X in vrtogvn_lookup.values()) \
-				or (Y != "%vr0" and Y in vrtogvn_lookup.values()):
+			if oldgvn(X) or oldgvn(Y):
 				assert(not "TODO");
 			else:
 				ops.append(("cbr_GE", [X, Y], "->", [out]));

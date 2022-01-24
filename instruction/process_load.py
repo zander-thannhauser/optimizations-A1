@@ -1,5 +1,5 @@
 
-from lookup import vrtovn, extovn, mkvn, avrwvn, pextovn, apexwvn, vntoex, vrtogvn_lookup;
+from lookup import vrtovn, extovn, mkvn, avrwvn, pextovn, apexwvn, vntoex, oldgvn;
 
 from .common import consider;
 
@@ -19,7 +19,11 @@ def process_load(ops, ins, outs):
 		match (vntoex(ivn)):
 			# load (addI X, c) => Y === loadAI X, c => Y
 			case ("addI", X, c):
-				ops.append(("loadAI", [X, c], "=>", [ovn]));
+				# check for using a move instruction's result
+				if oldgvn(X):
+					assert(not "TODO");
+				else:
+					ops.append(("loadAI", [X, c], "=>", [ovn]));
 			
 			# load (add  X, Y) => Z === loadAO X, Y => Z
 			case ("add", X, Y):
@@ -28,8 +32,7 @@ def process_load(ops, ins, outs):
 			# load (sub X, ("multI", Y, c)) => Z === loadAO X, (multI, Y -c) => Z
 			case ("sub", X, Y):
 				# check for using a move instruction's result
-				if     (X != "%vr0" and X in vrtogvn_lookup.values()) \
-					or (Y != "%vr0" and Y in vrtogvn_lookup.values()):
+				if oldgvn(X):
 					assert(not "TODO");
 				else:
 					subex = vntoex(Y);

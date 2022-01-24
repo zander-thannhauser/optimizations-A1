@@ -10,6 +10,8 @@ vrtolvn_lookup = {};
 
 vrtogvn_lookup = {};
 
+gvn_vers = {};
+
 pextovn_lookup = {};
 
 def new_frame_numbering(args = []):
@@ -25,7 +27,9 @@ def new_block_numbering():
 	vntoex_lookup.clear();
 	pextovn_lookup.clear();
 	vrtolvn_lookup.clear()
+	gvn_vers.clear();
 	for k, v in vrtogvn_lookup.items():
+		gvn_vers[v] = 0;
 		vrtolvn_lookup[k] = v;
 
 def after_call():
@@ -53,8 +57,10 @@ def mkvn(ex):
 	return vn;
 
 def vrtovn(vr):
-	print("vrtolvn_lookup:", vrtolvn_lookup);
+	# print("vrtolvn_lookup:", vrtolvn_lookup);
 	retval = vrtolvn_lookup[vr];
+	if retval in gvn_vers:
+		retval += ":%i" % gvn_vers[retval];
 	printf("vrtovn(vr = %s) -> %s\n", vr, retval);
 	return retval;
 
@@ -74,15 +80,42 @@ def vrtogvn(vr):
 	else:
 		retval = "%%vr%i" % register_counter;
 		register_counter += 1;
+		gvn_vers[retval] = 0;
 		vrtogvn_lookup[vr] = retval;
 		vrtolvn_lookup[vr] = retval;
 	printf("vrtogvn(vr = %s) -> %s\n", vr, retval);
-	print("vrtogvn_lookup:", vrtogvn_lookup);
+	# print("vrtogvn_lookup:", vrtogvn_lookup);
 	return retval;
+
+def incgvn(gvn):
+	assert(gvn in gvn_vers);
+	retval = gvn_vers[gvn] + 1;
+	printf("incgvn(gvn = %s) -> %i\n", gvn, retval);
+	gvn_vers[gvn] = retval;
+	print("gvn_vers:", gvn_vers);
+
+def oldgvn(gvn):
+	if ":" in gvn:
+		xs = gvn.split(":");
+		if gvn_vers[xs[0]] != int(xs[1]):
+			return True;
+	return False;
 
 def avrwvn(vr, vn):
 	printf("avrwsr(vr = %s, vn = %s);\n", vr, vn);
 	vrtolvn_lookup[vr] = vn;
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

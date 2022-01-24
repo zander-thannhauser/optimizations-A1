@@ -1,5 +1,5 @@
 
-from lookup import vrtovn, vntoex, vrtogvn_lookup;
+from lookup import vrtovn, vntoex, oldgvn;
 
 from .process_jumpI import process_jumpI;
 
@@ -18,16 +18,14 @@ def process_cbr(ops, ins, outs):
 		
 		case ("cmp_LE", X, Y):
 			# check for using a move instruction's result
-			if     (X != "%vr0" and X in vrtogvn_lookup.values()) \
-				or (Y != "%vr0" and Y in vrtogvn_lookup.values()):
+			if oldgvn(X) or oldgvn(Y):
 				assert(not "TODO");
 			else:
 				ops.append(("cbr_LE", [X, Y], "->", outs));
 		
 		case ("cmp_GT", X, Y):
 			# check for using a move instruction's result
-			if     (X != "%vr0" and X in vrtogvn_lookup.values()) \
-				or (Y != "%vr0" and Y in vrtogvn_lookup.values()):
+			if oldgvn(X) or oldgvn(Y):
 				assert(not "TODO");
 			else:
 				ops.append(("cbr_GT", [X, Y], "->", outs));

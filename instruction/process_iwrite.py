@@ -6,6 +6,6 @@ def process_iwrite(ops, ins, outs):
 	
 	ivn = vrtovn(ins[0]);
 	
-	ops.append(("iwrite", [ivn]));
+	ops.append(("iwrite", [ivn], "", []));
 
 

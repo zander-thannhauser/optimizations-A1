@@ -1,7 +1,7 @@
 
 from stdio import printf;
 
-from lookup import vrtovn, avrwvn, vrtogvn, vntoex, vrtogvn_lookup;
+from lookup import vrtovn, avrwvn, vrtogvn, vntoex, incgvn;
 
 def process_i2i(ops, ins, outs):
 	# p.casm("i2i", ins, "=>", outs);
@@ -21,7 +21,8 @@ def process_i2i(ops, ins, outs):
 		else:
 			ops.append((ex[0], list(ex[1:]), "=>", [gvn]));
 		avrwvn(outs[0], ivn);
-	
+		incgvn(gvn);
+
 
 
 

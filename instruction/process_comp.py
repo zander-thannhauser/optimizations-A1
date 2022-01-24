@@ -1,5 +1,5 @@
 
-from lookup import vrtovn, vntoex, extovn, mkvn, avrwvn, vrtogvn_lookup;
+from lookup import vrtovn, vntoex, extovn, mkvn, avrwvn, oldgvn;
 
 from .process_loadI import load_literal;
 
@@ -50,7 +50,7 @@ def process_comp(ops, ins, outs):
 		# (addI X, a) vs b => X vs (b - a)
 		case (("addI", X, a), b) if type(b) is int:
 			# check for using a move instruction's result
-			if (X != "%vr0" and X in vrtogvn_lookup.values()):
+			if oldgvn(X):
 				consider(ops, ("comp", lvn, rvn), out);
 			else:
 				subvn = load_literal(ops, b - a);

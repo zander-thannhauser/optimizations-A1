@@ -23,11 +23,11 @@ class printer:
 	def asm(self, cmd, ins = [], arrow = "", outs = [], prefix = "  "):
 		line = cmd;
 		if ins:
-			line += " " + ", ".join(str(x) for x in ins);
+			line += " " + ", ".join(ins);
 		if arrow:
 			line += " " + arrow;
 		if outs:
-			line += " " + ", ".join(str(x) for x in outs);
+			line += " " + ", ".join(outs);
 		self.print(line, prefix = prefix);
 	
 	def casm(self, cmd, ins = [], arrow = "", outs = []):

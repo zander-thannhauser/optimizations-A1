@@ -26,6 +26,7 @@ def process_fload(ops, ins, outs):
 			case ("sub", X, Y):
 				# check for using a move instruction's result
 				assert(not "TODO");
+				assert(not "TODO");
 				subex = vntoex(Y);
 				if subex[0] == "multI":
 					subvn = consider(ops, ("multI", subex[1], -subex[2]));

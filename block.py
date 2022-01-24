@@ -217,6 +217,18 @@ def process_block(t, p):
 	for operation in operations[::-1]:
 		print(operation);
 		print(vns);
+		
+		def clean(a):
+			for i, s in enumerate(a):
+				if type(s) is int:
+					a[i] = str(s);
+				elif ":" in s:
+					a[i] = a[i][:a[i].index(":")];
+		
+		clean(operation[1]);
+		
+		clean(operation[3]);
+		
 		# if your arrow is a '->': you stay
 		# or if you're one of the stores: you stay
 		# or if any of your outs is in vrtogvn.values(): you stay
@@ -229,16 +241,15 @@ def process_block(t, p):
 				vns.add(i);
 			# assert(not "CHECK");
 		elif False \
-			or (len(operation) <= 2 or operation[2] == "->") \
-			or (len(operation) >= 4 and any(out in vrtogvn_lookup.values() for out in operation[3])) \
-			or (len(operation) >= 4 and any(out in vns for out in operation[3])):
+			or (operation[2] != "=>") \
+			or (any(out in vrtogvn_lookup.values() for out in operation[3])) \
+			or (any(out in vns for out in operation[3])):
 			prefix = "  "
 			
 			# all of your ins (that are strings) are added to vns:
-			if len(operation) >= 2:
-				for i in operation[1]:
-					if type(i) is str:
-						vns.add(i);
+			for i in operation[1]:
+				vns.add(i);
+			
 			print("kept");
 		else:
 			prefix = "# "
@@ -248,6 +259,7 @@ def process_block(t, p):
 		outgoing_operations.insert(0, (prefix, operation))
 	
 	for o in outgoing_operations:
+		print(o[1]);
 		p.asm(*o[1], prefix = o[0]);
 	
 	# assert(not "CHECK");

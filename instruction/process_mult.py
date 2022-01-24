@@ -1,5 +1,5 @@
 
-from lookup import vrtovn, extovn, mkvn, avrwvn, vntoex, vrtogvn_lookup;
+from lookup import vrtovn, extovn, mkvn, avrwvn, vntoex, oldgvn;
 
 from .process_loadI import load_literal;
 
@@ -36,7 +36,8 @@ def process_mult(ops, ins, outs):
 		# substitutions:
 		# (addI X, a) * b => addI (multI X, b), (a * b)
 		case (("addI", X, a), b) if type(b) is int:
-			if X != "%vr0" and X in vrtogvn_lookup.values():
+			# check for using a move instruction's result
+			if oldgvn(X):
 				consider(ops, ("multI", lvn, b), out);
 			else:
 				subvn = consider(ops, ("multI", X, b));

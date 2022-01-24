@@ -27,28 +27,29 @@
 	.L1:
 	  i2i %vr0 => %vr14
 	# loadI -4 => %vr15
-	  addI %vr0, -4 => %vr16
+	# addI %vr0, -4 => %vr16
 	# loadI 1 => %vr17
-	  addI %vr10, -1 => %vr18
+	# addI %vr10, -1 => %vr18
 	# loadI 4 => %vr19
-	  multI %vr18, 4 => %vr20
-	  sub %vr16, %vr20 => %vr21
-	  multI %vr18, -4 => %vr23
-	  loadAO %vr16, %vr23 => %vr22
-	  mult %vr22, %vr10 => %vr24
-	  storeAO %vr24 => %vr16, %vr23
-	  call inc, %vr21
-	# loadI 1 => %vr25
-	  addI %vr10, 1 => %vr26
+	  multI %vr10, 4 => %vr20
+	# addI %vr20, -4 => %vr21
+	  sub %vr0, %vr20 => %vr22
+	  multI %vr10, -4 => %vr24
+	  loadAO %vr0, %vr24 => %vr23
+	  mult %vr23, %vr10 => %vr25
+	  storeAO %vr25 => %vr0, %vr24
+	  call inc, %vr22
+	# loadI 1 => %vr26
+	  addI %vr10, 1 => %vr27
 	  addI %vr10, 1 => %vr10
-	  loadI 10 => %vr27
-	# comp %vr26, %vr27 => %vr28
-	# cmp_LE %vr26, %vr27 => %vr29
-	  cbr_LE %vr26, %vr27 -> .L1
+	  loadI 10 => %vr28
+	# comp %vr27, %vr28 => %vr29
+	# cmp_LE %vr27, %vr28 => %vr30
+	  cbr_LE %vr27, %vr28 -> .L1
 	.L0:
-	# loadI -4 => %vr30
-	  addI %vr0, -4 => %vr31
-	  call writearray, %vr31
+	# loadI -4 => %vr31
+	  addI %vr0, -4 => %vr32
+	  call writearray, %vr32
 	  ret
 	.frame init, 0, %vr4
 	# loadI 1 => %vr5
@@ -66,19 +67,20 @@
 	  fadd %vr14, %vr15 => %vr16
 	  f2i %vr16 => %vr17
 	# loadI 1 => %vr18
-	  addI %vr6, -1 => %vr19
+	# addI %vr6, -1 => %vr19
 	# loadI 4 => %vr20
-	  multI %vr19, 4 => %vr21
-	  sub %vr4, %vr21 => %vr22
-	  store %vr17 => %vr22
-	  addI %vr6, 1 => %vr23
+	  multI %vr6, 4 => %vr21
+	  addI %vr21, -4 => %vr22
+	  sub %vr4, %vr22 => %vr23
+	  store %vr17 => %vr23
+	  addI %vr6, 1 => %vr24
 	  addI %vr6, 1 => %vr6
-	# addI %vr8, 1 => %vr24
+	# addI %vr8, 1 => %vr25
 	  addI %vr8, 1 => %vr8
-	  loadI 10 => %vr25
-	# comp %vr23, %vr25 => %vr26
-	# cmp_LE %vr23, %vr25 => %vr27
-	  cbr_LE %vr23, %vr25 -> .L3
+	  loadI 10 => %vr26
+	# comp %vr24, %vr26 => %vr27
+	# cmp_LE %vr24, %vr26 => %vr28
+	  cbr_LE %vr24, %vr26 -> .L3
 	.L2:
 	  ret
 	.frame writearray, 0, %vr4

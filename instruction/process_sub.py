@@ -1,7 +1,7 @@
 
 from stdio import printf;
 
-from lookup import vrtovn, extovn, mkvn, avrwvn, vntoex, vrtogvn_lookup;
+from lookup import vrtovn, extovn, mkvn, avrwvn, vntoex, oldgvn;
 
 from .process_loadI import load_literal;
 
@@ -31,7 +31,7 @@ def process_sub(ops, ins, outs):
 		# (addI X, a) - b => addI X, (a - b)
 		case (("addI", X, a), b) if type(b) is int:
 			# check for using a move instruction's result
-			if (X != "%vr0" and X in vrtogvn_lookup.values()):
+			if oldgvn(X):
 				assert(not "TODO");
 			elif (b == a):
 				assert(not "TODO");
@@ -49,8 +49,7 @@ def process_sub(ops, ins, outs):
 		# (addI X, a) - (addI Y, b) => addI (sub X, Y), (+ a - b)
 		case (("addI", X, a), ("addI", Y, b)):
 			# check for using a move instruction's result
-			if     (X != "%vr0" and X in vrtogvn_lookup.values()) \
-				or (Y != "%vr0" and Y in vrtogvn_lookup.values()):
+			if oldgvn(X) or oldgvn(Y):
 				assert(not "TODO");
 			elif X == Y:
 				assert(not "TODO");

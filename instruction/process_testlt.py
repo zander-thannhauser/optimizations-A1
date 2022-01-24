@@ -1,5 +1,5 @@
 
-from lookup import vrtovn, vntoex, extovn, mkvn, avrwvn, vrtogvn_lookup;
+from lookup import vrtovn, vntoex, extovn, mkvn, avrwvn, oldgvn;
 
 from .process_loadI import process_loadI;
 
@@ -20,8 +20,7 @@ def process_testlt(ops, ins, outs):
 		# substitutions:
 		case ("comp", X, Y):
 			# check for using a move instruction's result
-			if     (X != "%vr0" and X in vrtogvn_lookup.values()) \
-				or (Y != "%vr0" and Y in vrtogvn_lookup.values()):
+			if oldgvn(X) or oldgvn(Y):
 				assert(not "TODO");
 			else:
 				consider(ops, ("cmp_LT", X, Y), out);
