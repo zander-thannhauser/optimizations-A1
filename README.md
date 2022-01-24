@@ -1,32 +1,95 @@
+
 # optimizations-A1
 
 ## Carr's Numbers:
+| File             | Original | Opt.Time | Carr's LVN | Opt. # Inst. |
+|  -               |        - |          |          - |            - |
+| `arrayparam.il`  |      841 | 0m0.072s |        487 |          375 |
+| `bubble.il`      |     4374 | 0m0.076s |       2855 |         1444 |
+| `check.il`       |      140 | 0m0.031s |        130 |           64 |
+| `dynamic.il`     |    39155 | 0m0.063s |      23579 |        12853 |
+| `fib.il`         |      274 | 0m0.032s |        252 |          186 |
+| `gcd.il`         |      103 | 0m0.070s |         83 |           64 |
+| `newdyn.il`      |   136919 | 0m0.078s |      82256 |        44586 |
+| `qs.il`          |     4574 | 0m0.057s |       3468 |         2312 |
+| `while_array.il` |      377 | 0m0.036s |        315 |          165 |
 
-| File             | Original |   LVN | SSA DBRE | SSA DCE |      RA   | % Reduction |
-|  -               |        - |     - |        - |       - |       -   |           - |
-| `arrayparam.il`  |      841 |   487 |      465 |     443 |     443   |       47.3% |
-| `bubble.il`      |     4374 |  2855 |     2736 |    2481 |    2481   |       43.3% |
-| `check.il`       |      140 |   130 |      120 |       3 |       3   |       97.9% |
-| `dynamic.il`     |    39155 | 23579 |    19448 |   18434 | **19311** |       50.7% |
-| `fib.il`         |      274 |   252 |      232 |     211 |     211   |       23.0% |
-| `gcd.il`         |      103 |    83 |       78 |      73 |      73   |       29.1% |
-| `newdyn.il`      |   136919 | 82256 |    67755 |   64270 | **65204** |       52.4% |
-| `qs.il`          |     4574 |  3468 |     3373 |    3073 |    3073   |       32.8% |
-| `while_array.il` |      377 |   315 |      293 |     255 |    255    |       32.4% |
+# Dependencies
 
-# My Numbers:
-| File             | Original |     LVN | SSA DBRE | SSA DCE |      RA   | % Reduction |
-|  -               |        - |       - |        - |       - |       -   |           - |
-| `arrayparam.il`  |      841 | ➘   375 |      ??? |     ??? |     ???   |       ??.?% |
-| `bubble.il`      |     4374 | ➘  1444 |      ??? |     ??? |     ???   |       ??.?% |
-| `check.il`       |      140 | ➘    64 |      ??? |     ??? |     ???   |       ??.?% |
-| `dynamic.il`     |    39155 | ➘ 12853 |      ??? |     ??? |     ???   |       ??.?% |
-| `fib.il`         |      274 | ➘   186 |      ??? |     ??? |     ???   |       ??.?% |
-| `gcd.il`         |      103 | ➘    64 |      ??? |     ??? |     ???   |       ??.?% |
-| `newdyn.il`      |   136919 | ➘ 44586 |      ??? |     ??? |     ???   |       ??.?% |
-| `qs.il`          |     4574 | ➘  2312 |      ??? |     ??? |     ???   |       ??.?% |
-| `while_array.il` |      377 | ➘   165 |      ??? |     ??? |     ???   |       ??.?% |
+## Interpreter/Emulator
+My interpreter combines the `comp`, `test{eq,ne,gt,ge,lt,le}` and `cbr{,ne}`
+instructions into `cbr_{eq,ne,gt,ge,lt,le}` respectively. These instructions
+seem to not be supported by the given interpreter, so I wrote my own interpreter
+to support those instructions.
 
-// copy+paste: ➘ ➚
+The git repo is here: `https://github.com/zander-thannhauser/Iloc-interpreter.git`
+
+you should be able to build it by running:
+
+```
+git clone https://github.com/zander-thannhauser/Iloc-interpreter.git
+cd Iloc-interpreter
+make
+```
+
+you can run the examples like this:
+```
+./interpreter -i ./examples/arrayparam.il
+./interpreter -i ./examples/bubble.il
+./interpreter -i ./examples/gcd.il
+./interpreter -i ./examples/dynamic.il
+  ...
+```
+
+## Python 3.10
+
+To make development easier I used python 3.10's structured pattern matching
+statement `match`. To build from source on Ubuntu:
+
+```
+sudo apt update
+sudo apt install build-essential zlib1g-dev libncurses5-dev libgdbm-dev \
+	libnss3-dev libssl-dev libreadline-dev libffi-dev libsqlite3-dev wget \
+	libbz2-dev
+wget https://www.python.org/ftp/python/3.10.0/Python-3.10.0.tgz
+tar -xf Python-3.10.*.tgz
+cd Python-3.10.*/
+./configure --enable-optimizations
+make -j `nproc`
+# sudo make altinstall # installs by the name 'python3.10'
+```
+
+Running the installation command is optional.
+To run my optimizier on the example input files:
+
+```
+path/to/python3.10 ./main.py ./examples/arrayparam.il
+path/to/python3.10 ./main.py ./examples/bubble.il
+path/to/python3.10 ./main.py ./examples/check.il
+path/to/python3.10 ./main.py ./examples/dynamic.il
+path/to/python3.10 ./main.py ./examples/fib.il
+path/to/python3.10 ./main.py ./examples/gcd.il
+path/to/python3.10 ./main.py ./examples/helloworld.il
+path/to/python3.10 ./main.py ./examples/newdyn.il
+path/to/python3.10 ./main.py ./examples/qs.il
+path/to/python3.10 ./main.py ./examples/while_array.il
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

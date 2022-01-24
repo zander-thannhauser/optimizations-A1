@@ -45,7 +45,7 @@
 	  ret
 	.frame readarray, 10
 	  loadI .string_const_0 => %vr4
-	  iwrite %vr4
+	  swrite %vr4
 	# loadI 1 => %vr5
 	  loadI 1 => %vr6
 	# loadI 20 => %vr7
@@ -73,7 +73,7 @@
 	  ret
 	.frame writearray, 10
 	  loadI .string_const_1 => %vr4
-	  iwrite %vr4
+	  swrite %vr4
 	# loadI 1 => %vr5
 	  loadI 1 => %vr6
 	# loadI 20 => %vr7
