@@ -13,7 +13,7 @@
 	.float	.float_const_0, 1.7
 	.global	main_fp, 4, 4
 	.text
-	.frame	main, 92
+	.frame	main, 920
 	loadI	main_fp  => %vr4
 	store	%vr0  => %vr4
 	loadI	0  => %vr5
@@ -230,7 +230,7 @@
 	cbr	%vr25  -> .L5
 .L4:	nop
 	ret
-	.frame	quicksort, 8, %vr4, %vr5, %vr6
+	.frame	quicksort, 80, %vr4, %vr5, %vr6
 	load	%vr5  => %vr7
 	load	%vr6  => %vr8
 	comp	%vr7, %vr8 => %vr9

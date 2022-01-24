@@ -95,6 +95,8 @@ def incgvn(gvn):
 	print("gvn_vers:", gvn_vers);
 
 def oldgvn(gvn):
+	if type(gvn) is not str:
+		return False;
 	if ":" in gvn:
 		xs = gvn.split(":");
 		if gvn_vers[xs[0]] != int(xs[1]):

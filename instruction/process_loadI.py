@@ -5,12 +5,6 @@ from lookup import extovn, mkvn, avrwvn;
 
 from .common import consider;
 
-def sint(string):
-	try:
-		return int(string);
-	except:
-		return None;
-
 def load_literal(ops, literal, out = None):
 	vn = extovn(literal);
 	
@@ -28,9 +22,10 @@ def process_loadI(ops, ins, outs):
 	
 	out = outs[0];
 	
-	if literal := sint(ins[0]):
+	try:
+		literal = int(ins[0]);
 		load_literal(ops, literal, out);
-	else:
+	except:
 		consider(ops, ("loadI", ins[0]), out);
 
 

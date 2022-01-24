@@ -20,8 +20,19 @@ def process_cbrne(ops, ins, outs):
 		case ("cmp_LE", X, Y): assert(not "TODO");
 		case ("cmp_GT", X, Y): assert(not "TODO");
 		case ("cmp_GE", X, Y): assert(not "TODO");
-		case ("cmp_EQ", X, Y): assert(not "TODO");
-		case ("cmp_NE", X, Y): assert(not "TODO");
+		case ("cmp_EQ", X, Y):
+			# check for using a move instruction's result
+			if oldgvn(X) or oldgvn(Y):
+				assert(not "TODO");
+			else:
+				ops.append(("cbr_NE", [X, Y], "->", [out]));
+		
+		case ("cmp_NE", X, Y):
+			# check for using a move instruction's result
+			if oldgvn(X) or oldgvn(Y):
+				assert(not "TODO");
+			else:
+				ops.append(("cbr_EQ", [X, Y], "->", [out]));
 		
 		case ("testeq", X): assert(not "TODO");
 		case ("testne", X): assert(not "TODO");

@@ -14,7 +14,11 @@ def process_cbr(ops, ins, outs):
 			if c: process_jumpI(ops, [], outs);
 		
 		case ("cmp_LT", X, Y):
-			assert(not "TODO");
+			# check for using a move instruction's result
+			if oldgvn(X) or oldgvn(Y):
+				assert(not "TODO");
+			else:
+				ops.append(("cbr_LT", [X, Y], "->", outs));
 		
 		case ("cmp_LE", X, Y):
 			# check for using a move instruction's result
@@ -31,13 +35,22 @@ def process_cbr(ops, ins, outs):
 				ops.append(("cbr_GT", [X, Y], "->", outs));
 		
 		case ("cmp_GE", X, Y):
-			assert(not "TODO");
+			if oldgvn(X) or oldgvn(Y):
+				assert(not "TODO");
+			else:
+				ops.append(("cbr_GE", [X, Y], "->", outs));
 		
 		case ("cmp_EQ", X, Y):
-			assert(not "TODO");
+			if oldgvn(X) or oldgvn(Y):
+				assert(not "TODO");
+			else:
+				ops.append(("cbr_EQ", [X, Y], "->", outs));
 		
 		case ("cmp_NE", X, Y):
-			assert(not "TODO");
+			if oldgvn(X) or oldgvn(Y):
+				assert(not "TODO");
+			else:
+				ops.append(("cbr_NE", [X, Y], "->", outs));
 		
 		case ("testeq", X, Y): assert(not "TODO");
 		case ("testne", X, Y): assert(not "TODO");
@@ -48,8 +61,7 @@ def process_cbr(ops, ins, outs):
 		
 		# default:
 		case _:
-			assert(not "TODO");
-			# p.asm("cbr", [vn], "->", outs);
+			ops.append(("cbr", [vn], "->", outs));
 	
 
 

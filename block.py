@@ -85,6 +85,8 @@ from instruction.process_cbr_NE   import process_cbr_NE;
 # Undocumented:
 from instruction.process_nop      import process_nop;
 from instruction.process_call     import process_call;
+from instruction.process_icall    import process_icall;
+from instruction.process_iret     import process_iret;
 
 lookup = {
 	# Integer Arithmetic Instructions:
@@ -168,6 +170,8 @@ lookup = {
 	# Undocumented:
 	"nop": process_nop,
 	"call": process_call,
+	"icall": process_icall,
+	"iret": process_iret,
 }
 
 def process_block(t, p):
@@ -183,23 +187,23 @@ def process_block(t, p):
 		operation = t.token;
 		printf("operation == \"%s\"\n", operation);
 		t.next();
-		if operation not in ["ret", "nop"]:
+		if operation not in ["ret", "nop", "jumpI"]:
 			ins.append(t.token);
 			t.next();
 			while t.token == ',':
 				t.next();
 				ins.append(t.token);
 				t.next();
-			if operation not in ["iwrite", "fwrite", "swrite", "call"]:
-				# printf("t.token == \"%s\"\n", t.token);
-				assert(t.token in ["->", "=>"]);
+		if operation not in ["ret", "nop", "iwrite", "fwrite", "swrite", "iread", "iret", "call"]:
+			# printf("t.token == \"%s\"\n", t.token);
+			assert(t.token in ["->", "=>"]);
+			t.next();
+			outs.append(t.token);
+			t.next();
+			while t.token == ',':
 				t.next();
 				outs.append(t.token);
 				t.next();
-				while t.token == ',':
-					t.next();
-					outs.append(t.token);
-					t.next();
 		print(operation, ins, outs);
 		lookup[operation](operations, ins, outs);
 	
@@ -242,6 +246,7 @@ def process_block(t, p):
 			# assert(not "CHECK");
 		elif False \
 			or (operation[2] != "=>") \
+			or operation[0] in ["icall", "iret"] \
 			or (any(out in vrtogvn_lookup.values() for out in operation[3])) \
 			or (any(out in vns for out in operation[3])):
 			prefix = "  "

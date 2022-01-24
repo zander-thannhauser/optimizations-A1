@@ -1,7 +1,7 @@
 
-from lookup import vrtovn, extovn, mkvn, avrwvn, vntoex;
+from lookup import vrtovn, extovn, mkvn, avrwvn, vntoex, oldgvn;
 
-from .process_loadI import process_loadI;
+from .process_loadI import load_literal;
 
 from .common import consider;
 
@@ -15,8 +15,7 @@ def process_add(ops, ins, outs):
 	match (vntoex(lvn), vntoex(rvn)):
 		# constant-folding:
 		case (lex, rex) if type(lex) is int and type(rex) is int:
-			# load_literal([lex + rex], outs, p)
-			assert(not "TODO");
+			load_literal(ops, lex + rex, out)
 		
 		# identities:
 		# 0 + X = X
@@ -30,7 +29,12 @@ def process_add(ops, ins, outs):
 		# (addI X, a) + b => addI X, (a + b)
 		case (("addI", X, a), b) if type(b) is int:
 			# check for using a move instruction's result
-			assert(not "TODO");
+			if oldgvn(X):
+				consider(ops, ("addI", lvn, b), out);
+			elif a == -b:
+				assert(not "TODO");
+			else:
+				assert(not "TODO");
 		# a + (addI X, b) => addI X, (a + b)
 		case (a, ("addI", X, b)) if type(a) is int:
 			# check for using a move instruction's result
@@ -66,7 +70,7 @@ def process_add(ops, ins, outs):
 		
 		# default:
 		case (_, _):
-			assert(not "TODO");
+			consider(ops, ("add", lvn, rvn), out);
 	
 
 

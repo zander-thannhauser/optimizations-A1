@@ -33,8 +33,8 @@ def process_sub(ops, ins, outs):
 			# check for using a move instruction's result
 			if oldgvn(X):
 				assert(not "TODO");
-			elif (b == a):
-				assert(not "TODO");
+			elif b == a:
+				avrwvn(out, X);
 			else:
 				consider(ops, ("addI", X, a - b), out);
 		

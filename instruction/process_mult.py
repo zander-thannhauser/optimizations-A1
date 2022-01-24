@@ -25,7 +25,7 @@ def process_mult(ops, ins, outs):
 			assert(not "TODO");
 		# 1 * X = X
 		case (1, _):
-			assert(not "TODO");
+			avrwvn(out, rvn);
 		# X * 0 = 0
 		case (_, 0):
 			assert(not "TODO");
@@ -58,7 +58,7 @@ def process_mult(ops, ins, outs):
 		
 		# mult X, c => multI X, c:
 		case (_, c) if type(c) is int:
-			assert(not "TODO");
+			consider(ops, ("multI", lvn, c), out);
 		# mult c, X => multI X, c:
 		case (c, _) if type(c) is int:
 			assert(not "TODO");

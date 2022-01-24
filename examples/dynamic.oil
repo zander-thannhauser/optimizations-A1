@@ -1,0 +1,329 @@
+.data
+	   .string     .int_wformat, "%d\12"
+	   .string   .float_wformat, "%f\12"
+	   .string    .char_wformat, "%c\12"
+	   .string  .string_wformat, "%s\12"
+	   .string     .int_rformat, "%d"
+	   .string   .float_rformat, "%f"
+	   .string    .char_rformat, "%c"
+	   .string  .string_rformat, "%s"
+.text
+	.frame main, 18200
+	  loadI 0 => %vr4
+	  loadI 1 => %vr5
+	  i2i %vr0 => %vr6
+	# loadI -4 => %vr7
+	# addI %vr0, -4 => %vr8
+	  loadI 4 => %vr9
+	  storeAI %vr4 => %vr0, -4
+	  loadI 2 => %vr10
+	# addI %vr0, -8 => %vr11
+	  storeAI %vr5 => %vr0, -8
+	  loadI 3 => %vr12
+	  loadI 8 => %vr13
+	# addI %vr0, -12 => %vr14
+	  storeAI %vr10 => %vr0, -12
+	# loadI 12 => %vr15
+	# addI %vr0, -16 => %vr16
+	  storeAI %vr12 => %vr0, -16
+	  loadI 5 => %vr17
+	# loadI 16 => %vr18
+	# addI %vr0, -20 => %vr19
+	  storeAI %vr9 => %vr0, -20
+	  loadI 6 => %vr20
+	# loadI 20 => %vr21
+	# addI %vr0, -24 => %vr22
+	  storeAI %vr17 => %vr0, -24
+	  loadI 7 => %vr23
+	# loadI 24 => %vr24
+	# addI %vr0, -28 => %vr25
+	  storeAI %vr20 => %vr0, -28
+	# loadI 28 => %vr26
+	# addI %vr0, -32 => %vr27
+	  storeAI %vr23 => %vr0, -32
+	  loadI 9 => %vr28
+	# loadI 32 => %vr29
+	# addI %vr0, -36 => %vr30
+	  storeAI %vr13 => %vr0, -36
+	# loadI 10 => %vr31
+	# loadI 36 => %vr32
+	# addI %vr0, -40 => %vr33
+	  storeAI %vr28 => %vr0, -40
+	  loadI 11 => %vr34
+	# loadI 40 => %vr35
+	# addI %vr0, -44 => %vr36
+	  storeAI %vr13 => %vr0, -44
+	# loadI 44 => %vr37
+	# addI %vr0, -48 => %vr38
+	  storeAI %vr23 => %vr0, -48
+	# loadI 13 => %vr39
+	# loadI 48 => %vr40
+	# addI %vr0, -52 => %vr41
+	  storeAI %vr20 => %vr0, -52
+	# loadI 14 => %vr42
+	# loadI 52 => %vr43
+	# addI %vr0, -56 => %vr44
+	  storeAI %vr17 => %vr0, -56
+	# loadI 15 => %vr45
+	# loadI 56 => %vr46
+	# addI %vr0, -60 => %vr47
+	  storeAI %vr9 => %vr0, -60
+	# loadI 60 => %vr48
+	# addI %vr0, -64 => %vr49
+	  storeAI %vr12 => %vr0, -64
+	# loadI 17 => %vr50
+	# loadI 64 => %vr51
+	# addI %vr0, -68 => %vr52
+	  storeAI %vr10 => %vr0, -68
+	# loadI 18 => %vr53
+	# loadI 68 => %vr54
+	# addI %vr0, -72 => %vr55
+	  storeAI %vr5 => %vr0, -72
+	# loadI 19 => %vr56
+	# loadI 72 => %vr57
+	# addI %vr0, -76 => %vr58
+	  storeAI %vr4 => %vr0, -76
+	# loadI -80 => %vr59
+	# addI %vr0, -80 => %vr60
+	  storeAI %vr4 => %vr0, -80
+	# addI %vr0, -84 => %vr61
+	  storeAI %vr5 => %vr0, -84
+	# addI %vr0, -88 => %vr62
+	  storeAI %vr12 => %vr0, -88
+	# addI %vr0, -92 => %vr63
+	  storeAI %vr17 => %vr0, -92
+	# addI %vr0, -96 => %vr64
+	  storeAI %vr23 => %vr0, -96
+	# addI %vr0, -100 => %vr65
+	  storeAI %vr28 => %vr0, -100
+	# addI %vr0, -104 => %vr66
+	  storeAI %vr34 => %vr0, -104
+	# addI %vr0, -108 => %vr67
+	  storeAI %vr9 => %vr0, -108
+	# addI %vr0, -112 => %vr68
+	  storeAI %vr12 => %vr0, -112
+	# addI %vr0, -116 => %vr69
+	  storeAI %vr10 => %vr0, -116
+	# addI %vr0, -120 => %vr70
+	  storeAI %vr5 => %vr0, -120
+	# addI %vr0, -124 => %vr71
+	  storeAI %vr28 => %vr0, -124
+	# addI %vr0, -128 => %vr72
+	  storeAI %vr13 => %vr0, -128
+	# addI %vr0, -132 => %vr73
+	  storeAI %vr23 => %vr0, -132
+	# addI %vr0, -136 => %vr74
+	  storeAI %vr20 => %vr0, -136
+	# addI %vr0, -140 => %vr75
+	  storeAI %vr4 => %vr0, -140
+	  loadI 20 => %vr76
+	  loadI 1 => %vr77
+	.L1:
+	# loadI 1 => %vr78
+	  addI %vr77, -1 => %vr79
+	  add %vr76, %vr77 => %vr80
+	  i2i %vr0 => %vr6
+	# loadI -144 => %vr81
+	# addI %vr0, -144 => %vr82
+	# addI %vr80, -1 => %vr83
+	# loadI 4 => %vr84
+	  multI %vr80, 4 => %vr85
+	# addI %vr85, -4 => %vr86
+	  sub %vr0, %vr85 => %vr87
+	# addI %vr87, -140 => %vr88
+	  storeAI %vr79 => %vr87, -140
+	  addI %vr77, 1 => %vr89
+	  addI %vr77, 1 => %vr77
+	# addI %vr89, 1 => %vr90
+	# loadI -4 => %vr91
+	  addI %vr0, -4 => %vr92
+	# multI %vr89, 4 => %vr93
+	# sub %vr92, %vr93 => %vr94
+	  multI %vr89, -4 => %vr96
+	  loadAO %vr92, %vr96 => %vr95
+	  loadI 0 => %vr97
+	# comp %vr95, %vr97 => %vr98
+	# cmp_NE %vr95, %vr97 => %vr99
+	  cbr_NE %vr95, %vr97 -> .L1
+	.L0:
+	# loadI 1 => %vr100
+	  loadI 1 => %vr101
+	# loadI 2 => %vr102
+	  i2i %vr0 => %vr6
+	# loadI -80 => %vr103
+	# addI %vr0, -80 => %vr104
+	# loadI 4 => %vr105
+	# addI %vr0, -84 => %vr106
+	  loadAI %vr0, -84 => %vr107
+	  loadI 0 => %vr108
+	# comp %vr107, %vr108 => %vr109
+	# cmp_EQ %vr107, %vr108 => %vr110
+	  cbr_EQ %vr107, %vr108 -> .L2
+	.L3:
+	# loadI 1 => %vr111
+	  addI %vr101, -1 => %vr112
+	  mult %vr101, %vr76 => %vr113
+	# addI %vr113, 1 => %vr114
+	  i2i %vr0 => %vr6
+	# loadI -144 => %vr115
+	  addI %vr0, -144 => %vr116
+	# loadI 4 => %vr117
+	# multI %vr113, 4 => %vr118
+	# sub %vr116, %vr118 => %vr119
+	  multI %vr113, -4 => %vr120
+	  storeAO %vr112 => %vr116, %vr120
+	  addI %vr101, 1 => %vr121
+	  addI %vr101, 1 => %vr101
+	# addI %vr121, 1 => %vr122
+	# loadI -80 => %vr123
+	  addI %vr0, -80 => %vr124
+	# multI %vr121, 4 => %vr125
+	# sub %vr124, %vr125 => %vr126
+	  multI %vr121, -4 => %vr128
+	  loadAO %vr124, %vr128 => %vr127
+	  loadI 0 => %vr129
+	# comp %vr127, %vr129 => %vr130
+	# cmp_NE %vr127, %vr129 => %vr131
+	  cbr_NE %vr127, %vr129 -> .L3
+	.L2:
+	  loadI 2 => %vr132
+	  loadI 2 => %vr133
+	# comp %vr132, %vr101 => %vr134
+	# cmp_GT %vr132, %vr101 => %vr135
+	  cbr_GT %vr132, %vr101 -> .L4
+	.L5:
+	  loadI 2 => %vr136
+	  loadI 2 => %vr137
+	# comp %vr136, %vr77 => %vr138
+	# cmp_GT %vr136, %vr77 => %vr139
+	  cbr_GT %vr136, %vr77 -> .L6
+	.L7:
+	# loadI 1 => %vr140
+	  addI %vr133, -1 => %vr141
+	  mult %vr141, %vr76 => %vr142
+	  addI %vr137, -1 => %vr143
+	  add %vr142, %vr143 => %vr144
+	  i2i %vr0 => %vr6
+	# loadI -144 => %vr145
+	# addI %vr0, -144 => %vr146
+	# addI %vr144, -1 => %vr147
+	# loadI 4 => %vr148
+	  multI %vr144, 4 => %vr149
+	# addI %vr149, -4 => %vr150
+	  sub %vr0, %vr149 => %vr151
+	# addI %vr151, -140 => %vr152
+	  loadAI %vr151, -140 => %vr153
+	  mult %vr133, %vr76 => %vr154
+	  add %vr154, %vr137 => %vr155
+	# addI %vr155, -1 => %vr156
+	  multI %vr155, 4 => %vr157
+	# addI %vr157, -4 => %vr158
+	  sub %vr0, %vr157 => %vr159
+	# addI %vr159, -140 => %vr160
+	  storeAI %vr153 => %vr159, -140
+	# loadI -80 => %vr161
+	# addI %vr0, -80 => %vr162
+	  multI %vr133, 4 => %vr163
+	# addI %vr163, -4 => %vr164
+	  sub %vr0, %vr163 => %vr165
+	# addI %vr165, -76 => %vr166
+	  loadAI %vr165, -76 => %vr167
+	# loadI -4 => %vr168
+	# addI %vr0, -4 => %vr169
+	# multI %vr137, 4 => %vr170
+	# addI %vr170, -4 => %vr171
+	# sub %vr0, %vr170 => %vr172
+	  multI %vr137, -4 => %vr174
+	  loadAO %vr0, %vr174 => %vr173
+	# comp %vr167, %vr173 => %vr175
+	# cmp_NE %vr167, %vr173 => %vr176
+	  cbr_EQ %vr167, %vr173 -> .L8
+	  addI %vr153, 1 => %vr177
+	  storeAI %vr177 => %vr159, -140
+	.L8:
+	# loadI 1 => %vr178
+	  addI %vr133, -1 => %vr179
+	  mult %vr179, %vr76 => %vr180
+	  add %vr180, %vr137 => %vr181
+	  i2i %vr0 => %vr6
+	# loadI -144 => %vr182
+	# addI %vr0, -144 => %vr183
+	# addI %vr181, -1 => %vr184
+	# loadI 4 => %vr185
+	  multI %vr181, 4 => %vr186
+	# addI %vr186, -4 => %vr187
+	  sub %vr0, %vr186 => %vr188
+	# addI %vr188, -140 => %vr189
+	  loadAI %vr188, -140 => %vr190
+	  mult %vr133, %vr76 => %vr191
+	  add %vr191, %vr137 => %vr192
+	# addI %vr192, -1 => %vr193
+	  multI %vr192, 4 => %vr194
+	# addI %vr194, -4 => %vr195
+	  sub %vr0, %vr194 => %vr196
+	# addI %vr196, -140 => %vr197
+	  loadAI %vr196, -140 => %vr198
+	# comp %vr190, %vr198 => %vr199
+	# cmp_LT %vr190, %vr198 => %vr200
+	  cbr_GE %vr190, %vr198 -> .L9
+	  loadAI %vr188, -140 => %vr201
+	  addI %vr201, 1 => %vr202
+	  storeAI %vr202 => %vr196, -140
+	.L9:
+	  mult %vr133, %vr76 => %vr203
+	# loadI 1 => %vr204
+	  addI %vr137, -1 => %vr205
+	  add %vr203, %vr205 => %vr206
+	  i2i %vr0 => %vr6
+	# loadI -144 => %vr207
+	# addI %vr0, -144 => %vr208
+	# addI %vr206, -1 => %vr209
+	# loadI 4 => %vr210
+	  multI %vr206, 4 => %vr211
+	# addI %vr211, -4 => %vr212
+	  sub %vr0, %vr211 => %vr213
+	# addI %vr213, -140 => %vr214
+	  loadAI %vr213, -140 => %vr215
+	  add %vr203, %vr137 => %vr216
+	# addI %vr216, -1 => %vr217
+	  multI %vr216, 4 => %vr218
+	# addI %vr218, -4 => %vr219
+	  sub %vr0, %vr218 => %vr220
+	# addI %vr220, -140 => %vr221
+	  loadAI %vr220, -140 => %vr222
+	# comp %vr215, %vr222 => %vr223
+	# cmp_LT %vr215, %vr222 => %vr224
+	  cbr_GE %vr215, %vr222 -> .L10
+	  loadAI %vr213, -140 => %vr225
+	  addI %vr225, 1 => %vr226
+	  storeAI %vr226 => %vr220, -140
+	.L10:
+	# loadI 1 => %vr227
+	  addI %vr137, 1 => %vr228
+	  addI %vr137, 1 => %vr137
+	# comp %vr228, %vr77 => %vr229
+	# cmp_LE %vr228, %vr77 => %vr230
+	  cbr_LE %vr228, %vr77 -> .L7
+	.L6:
+	# loadI 1 => %vr231
+	  addI %vr133, 1 => %vr232
+	  addI %vr133, 1 => %vr133
+	# comp %vr232, %vr101 => %vr233
+	# cmp_LE %vr232, %vr101 => %vr234
+	  cbr_LE %vr232, %vr101 -> .L5
+	.L4:
+	  mult %vr101, %vr76 => %vr235
+	  add %vr235, %vr77 => %vr236
+	  i2i %vr0 => %vr6
+	# loadI -144 => %vr237
+	# addI %vr0, -144 => %vr238
+	# loadI 1 => %vr239
+	# addI %vr236, -1 => %vr240
+	# loadI 4 => %vr241
+	  multI %vr236, 4 => %vr242
+	# addI %vr242, -4 => %vr243
+	  sub %vr0, %vr242 => %vr244
+	# addI %vr244, -140 => %vr245
+	  loadAI %vr244, -140 => %vr246
+	  iwrite %vr246
+	  ret
