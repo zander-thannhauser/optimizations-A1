@@ -1,5 +1,5 @@
 
-from lookup import vrtovn, vntoex, extovn, mkvn, avrwvn;
+from lookup import vrtovn, vntoex, extovn, mkvn, avrwvn, vrtogvn_lookup;
 
 from .process_loadI import process_loadI;
 
@@ -15,20 +15,17 @@ def process_testle(ops, ins, outs):
 	match (vntoex(ivn)):
 		# constant-fold:
 		case c if type(c) is int:
-			process_loadI(ops, [1 if c <= 0 else 0], outs);
+			load_literal(ops, 1 if c <= 0 else 0, out);
 		
 		# substitutions:
 		case ("comp", X, Y):
-			consider(ops, ("cmp_LE", X, Y), out);
+			# check for using a move instruction's result
+			if     (X != "%vr0" and X in vrtogvn_lookup.values()) \
+				or (Y != "%vr0" and Y in vrtogvn_lookup.values()):
+				assert(not "TODO");
+			else:
+				consider(ops, ("cmp_LE", X, Y), out);
 		
 		# default:
 		case (iex):
 			assert(not "TODO");
-#	
-#		ex = ("testgt", ivn);
-#		ovn = extovn(ex);
-#		if not ovn:
-#			ovn = mkvn(ex);
-#			p.asm("testgt", [ivn], "=>", [ovn]);
-#		avrwvn(outs[0], ovn);
-	

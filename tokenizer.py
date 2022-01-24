@@ -75,7 +75,7 @@ class tokenizer:
 				break;
 			elif '0' <= self.c <= '9':
 				next();
-				while '0' <= self.c <= '9':
+				while self.c == '.' or '0' <= self.c <= '9':
 					next();
 				break;
 			elif self.c in tokenchar1:

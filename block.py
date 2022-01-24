@@ -181,7 +181,7 @@ def process_block(t, p):
 		ins = []
 		outs = []
 		operation = t.token;
-		# printf("operation == \"%s\"\n", operation);
+		printf("operation == \"%s\"\n", operation);
 		t.next();
 		if operation not in ["ret", "nop"]:
 			ins.append(t.token);
@@ -190,7 +190,7 @@ def process_block(t, p):
 				t.next();
 				ins.append(t.token);
 				t.next();
-			if operation not in ["iwrite", "fwrite", "swrite"]:
+			if operation not in ["iwrite", "fwrite", "swrite", "call"]:
 				# printf("t.token == \"%s\"\n", t.token);
 				assert(t.token in ["->", "=>"]);
 				t.next();
@@ -205,15 +205,18 @@ def process_block(t, p):
 	
 	#for o in operations:
 	#	print(o);
+	#assert(not "CHECK");
 	
 	vns = set();
+	
+	print("vrtogvn_lookup.values() ==", vrtogvn_lookup.values());
 	
 	# (prefix, operation)
 	outgoing_operations = []
 	
 	for operation in operations[::-1]:
-		# print(operation);
-		# print(vns);
+		print(operation);
+		print(vns);
 		# if your arrow is a '->': you stay
 		# or if you're one of the stores: you stay
 		# or if any of your outs is in vrtogvn.values(): you stay
@@ -236,16 +239,18 @@ def process_block(t, p):
 				for i in operation[1]:
 					if type(i) is str:
 						vns.add(i);
-			# print("kept");
+			print("kept");
 		else:
 			prefix = "# "
-			# print("skipped");
+			print("skipped");
 		
 		# print(prefix, operation);
 		outgoing_operations.insert(0, (prefix, operation))
 	
 	for o in outgoing_operations:
 		p.asm(*o[1], prefix = o[0]);
+	
+	# assert(not "CHECK");
 
 
 

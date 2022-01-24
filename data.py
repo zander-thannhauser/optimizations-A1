@@ -11,9 +11,17 @@ def process_data(t, p):
 				literal = next(t);
 				p.printf("%8s %16s, %s", ".string", label, literal);
 			elif token == ".float":
-				assert(not "TODO");
+				label = next(t);
+				assert(next(t) == ',');
+				literal = next(t);
+				p.printf("%8s %16s, %s", ".float", label, literal);
 			elif token == ".global":
-				assert(not "TODO");
+				label = next(t);
+				assert(next(t) == ',');
+				align = next(t);
+				assert(next(t) == ',');
+				size = next(t);
+				p.printf("%8s %16s, %s, %s", ".global", label, align, size);
 			else:
 				break;
 		p.unindent();

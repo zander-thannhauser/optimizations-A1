@@ -1,21 +1,23 @@
 
-from lookup import vrtovn, extovn, mkvn, avrwvn, vntoex;
+from lookup import vrtovn, extovn, mkvn, avrwvn, vntoex, vrtogvn_lookup;
 
-from .process_loadI import process_loadI;
+from .process_loadI import load_literal;
 
 from .common import consider;
 
 def process_mult(ops, ins, outs):
 	# p.casm("mult", ins, "=>", outs);
 	
-	lvn, rvn = vrtovn(ins[0]), vrtovn(ins[1])
+	l, r = ins[0], ins[1]
+	
+	lvn, rvn = vrtovn(l), vrtovn(r)
 	
 	out = outs[0];
 	
 	match (vntoex(lvn), vntoex(rvn)):
 		# constant-folding:
 		case (lex, rex) if type(lex) is int and type(rex) is int:
-			process_loadI(ops, [lex * rex], outs);
+			load_literal(ops, lex * rex, out);
 			
 		# identities:
 		# 0 * X = 0
@@ -32,11 +34,14 @@ def process_mult(ops, ins, outs):
 			assert(not "TODO");
 		
 		# substitutions:
-		# (addI  X, a) * b => addI (multI X, b), (a * b)
+		# (addI X, a) * b => addI (multI X, b), (a * b)
 		case (("addI", X, a), b) if type(b) is int:
-			subvn = consider(ops, ("multI", X, b));
-			consider(ops, ("addI", subvn, a * b), out);
-		# a * (addI  X, b) => addI (multI X, a), (a * b)
+			if X != "%vr0" and X in vrtogvn_lookup.values():
+				consider(ops, ("multI", lvn, b), out);
+			else:
+				subvn = consider(ops, ("multI", X, b));
+				consider(ops, ("addI", subvn, a * b), out);
+		# a * (addI X, b) => addI (multI X, a), (a * b)
 		case (a, ("addI", X, b)) if type(a) is int:
 			assert(not "TODO");
 		# (multI X, a) * b => multI X, (a * b)
@@ -56,18 +61,12 @@ def process_mult(ops, ins, outs):
 		# mult c, X => multI X, c:
 		case (c, _) if type(c) is int:
 			assert(not "TODO");
-		# default:
-		case (lex, rex):
-			assert(not "TODO");
-	
 		
-#		ex = ("mult", lvn, rvn);
-#		vn = extovn(ex);
-#		if not vn:
-#			vn = mkvn(ex);
-#			p.asm("mult", [lvn, rvn], "=>", [vn]);
-#		avrwvn(outs[0], vn);
-
+		# default:
+		case (_, _):
+			# print(lex, rex);
+			consider(ops, ("mult", lvn, rvn), out);
+	
 
 
 

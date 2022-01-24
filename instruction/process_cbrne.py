@@ -1,5 +1,5 @@
 
-from lookup import vntoex, vrtovn
+from lookup import vntoex, vrtovn, vrtogvn_lookup;
 
 def process_cbrne(ops, ins, outs):
 	# p.casm("cbrne", ins, "->", outs);
@@ -11,7 +11,12 @@ def process_cbrne(ops, ins, outs):
 	match (vntoex(ivn)):
 		
 		case ("cmp_LT", X, Y):
-			ops.append(("cbr_GE", [X, Y], "->", [out]));
+			# check for using a move instruction's result
+			if     (X != "%vr0" and X in vrtogvn_lookup.values()) \
+				or (Y != "%vr0" and Y in vrtogvn_lookup.values()):
+				assert(not "TODO");
+			else:
+				ops.append(("cbr_GE", [X, Y], "->", [out]));
 		
 		case ("cmp_LE", X, Y): assert(not "TODO");
 		case ("cmp_GT", X, Y): assert(not "TODO");
@@ -29,10 +34,3 @@ def process_cbrne(ops, ins, outs):
 		case _:
 			assert(not "TODO");
 	
-#	iex = vntoex(ivn)
-#	
-#	if type(ivn) is int:
-#		assert(not "TODO");
-#	else:
-#		p.asm("cbrne", [ivn], "->", outs);
-

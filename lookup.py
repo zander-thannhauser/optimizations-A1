@@ -15,16 +15,21 @@ pextovn_lookup = {};
 def new_frame_numbering(args = []):
 	global register_counter;
 	register_counter = 0;
+	vrtogvn_lookup.clear();
 	for a in ["%vr0", "%vr1", "%vr2", "%vr3"] + args:
 		vrtogvn_lookup[a] = "%%vr%i" % (register_counter);
 		register_counter += 1;
 
 def new_block_numbering():
-	global extovn_lookup, vntoex_lookup, vrtolvn_lookup;
-	extovn_lookup = {};
-	vntoex_lookup = {};
-	vrtolvn_lookup = {k: v for k, v in vrtogvn_lookup.items()};
-	pextovn_lookup = {};
+	extovn_lookup.clear();
+	vntoex_lookup.clear();
+	pextovn_lookup.clear();
+	vrtolvn_lookup.clear()
+	for k, v in vrtogvn_lookup.items():
+		vrtolvn_lookup[k] = v;
+
+def after_call():
+	new_block_numbering();
 
 def extovn(ex):
 	retval = extovn_lookup.get(ex, None);
@@ -48,6 +53,7 @@ def mkvn(ex):
 	return vn;
 
 def vrtovn(vr):
+	print("vrtolvn_lookup:", vrtolvn_lookup);
 	retval = vrtolvn_lookup[vr];
 	printf("vrtovn(vr = %s) -> %s\n", vr, retval);
 	return retval;
@@ -70,7 +76,8 @@ def vrtogvn(vr):
 		register_counter += 1;
 		vrtogvn_lookup[vr] = retval;
 		vrtolvn_lookup[vr] = retval;
-	printf("vrtosr(vr = %s) -> %s\n", vr, retval);
+	printf("vrtogvn(vr = %s) -> %s\n", vr, retval);
+	print("vrtogvn_lookup:", vrtogvn_lookup);
 	return retval;
 
 def avrwvn(vr, vn):

@@ -1,7 +1,7 @@
 
-from lookup import vrtovn, vntoex, extovn, mkvn, avrwvn;
+from lookup import vrtovn, vntoex, extovn, mkvn, avrwvn, vrtogvn_lookup;
 
-from .process_loadI import process_loadI;
+from .process_loadI import load_literal;
 
 from .common import consider;
 
@@ -24,14 +24,14 @@ def process_comp(ops, ins, outs):
 	match (vntoex(lvn), vntoex(rvn)):
 		# constant-fold:
 		case (lex, rex) if type(lex) is int and type(rex) is int:
-			process_loadI(ops, [comp(lex, rex)], outs);
+			load_literal(ops, comp(lex, rex), out);
 		
 		# identities:
 		# comp(X, X) = 0
 		case (_, _) if lvn == rvn:
 			assert(not "TODO");
 		
-		# substitutions:
+		# substitutions: (can't do them if either param is move-d)
 		# (addI X, a) vs (addI X, b) => a vs b
 		case (("addI", X, a), ("addI", Y, b)) if X == Y:
 			assert(not "TODO");
@@ -49,8 +49,12 @@ def process_comp(ops, ins, outs):
 		
 		# (addI X, a) vs b => X vs (b - a)
 		case (("addI", X, a), b) if type(b) is int:
-			subvn = process_loadI(ops, [b - a], None);
-			consider(ops, ("comp", X, subvn), out);
+			# check for using a move instruction's result
+			if (X != "%vr0" and X in vrtogvn_lookup.values()):
+				consider(ops, ("comp", lvn, rvn), out);
+			else:
+				subvn = load_literal(ops, b - a);
+				consider(ops, ("comp", X, subvn), out);
 		
 		# (multI X, a) vs (multI X, b) => a vs b
 		case (("multI", X, a), ("multI", Y, b)) if X == Y:

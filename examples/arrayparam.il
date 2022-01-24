@@ -10,8 +10,8 @@
 	.string	.string_rformat, "%s"
 	.float	.float_const_0, 0.01
 	.global	main_fp, 4, 4
-.text
-	.frame	main, 40
+	.text
+	.frame	main, 80 # 40
 		loadI	main_fp  => %vr4
 		store	%vr0  => %vr4
 		loadI	-4  => %vr5
@@ -19,7 +19,7 @@
 		call	init, %vr6 
 		loadI	-4  => %vr5
 		add	%vr0, %vr5 => %vr6
-		call	writearray, %vr6 
+		call	writearray, %vr6
 		loadI	1  => %vr7
 		i2i	%vr7  => %vr4
 		loadI	10  => %vr8
@@ -66,7 +66,7 @@
 		loadI	-4  => %vr5
 		add	%vr0, %vr5 => %vr6
 		call	writearray, %vr6 
-		ret
+	ret
 	.frame	init, 0, %vr8
 		loadI	1  => %vr9
 		i2i	%vr9  => %vr4
@@ -101,7 +101,7 @@
 		testle	%vr11  => %vr12
 		cbr	%vr12  -> .L3
 	.L2:	nop
-		ret
+	ret
 	.frame	writearray, 0, %vr4
 		loadI	1  => %vr5
 		loadI	1  => %vr5
@@ -183,10 +183,16 @@
 		sub	%vr4, %vr52 => %vr53
 		load	%vr53  => %vr54
 		iwrite	%vr54
-		ret
-	.frame	inc, 0, %vr4
-		load	%vr4  => %vr5
+	ret
+	.frame	inc, 0, %vr420
+		load	%vr420  => %vr5
 		loadI	1  => %vr6
 		add	%vr5, %vr6 => %vr7
-		store	%vr7  => %vr4
-		ret
+		store	%vr7  => %vr420
+	ret
+	
+	
+	
+	
+	
+	

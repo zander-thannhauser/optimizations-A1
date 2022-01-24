@@ -15,7 +15,7 @@ def process_add(ops, ins, outs):
 	match (vntoex(lvn), vntoex(rvn)):
 		# constant-folding:
 		case (lex, rex) if type(lex) is int and type(rex) is int:
-			# process_loadI([lex + rex], outs, p)
+			# load_literal([lex + rex], outs, p)
 			assert(not "TODO");
 		
 		# identities:
@@ -29,18 +29,23 @@ def process_add(ops, ins, outs):
 		# substitutions:
 		# (addI X, a) + b => addI X, (a + b)
 		case (("addI", X, a), b) if type(b) is int:
+			# check for using a move instruction's result
 			assert(not "TODO");
 		# a + (addI X, b) => addI X, (a + b)
 		case (a, ("addI", X, b)) if type(a) is int:
+			# check for using a move instruction's result
 			assert(not "TODO");
 		# (sub X, Y) + Y => X
 		case (("sub", X, Y), Z) if Y == Z:
+			# check for using a move instruction's result
 			assert(not "TODO");
 		# X + (sub Y, X) => Y
 		case (X, ("sub", Y, Z)) if Z == Z:
+			# check for using a move instruction's result
 			assert(not "TODO");
 		# (addI X, a) + (addI, Y, b) => addI (add X, Y), (a + b)
 		case (("addI", X, a), ("addI", Y, b)):
+			# check for using a move instruction's result
 			if a + b == 0:
 				assert(not "TODO");
 			else:
@@ -48,6 +53,7 @@ def process_add(ops, ins, outs):
 		
 		# (multI X, a) + (multI Y, a) = multI (add X, Y), a
 		case (("multI", X, a), ("multI", Y, b)) if a == b:
+			# check for using a move instruction's result
 			assert(not "TODO");
 		
 		# X + c => addI X, c
@@ -62,12 +68,6 @@ def process_add(ops, ins, outs):
 		case (_, _):
 			assert(not "TODO");
 	
-#		ex = ("add", lvn, rvn);
-#		vn = extovn(ex);
-#		if not vn:
-#			vn = mkvn(ex);
-#				ops.append(("add", [lvn, rvn], "=>", [vn]));
-#		avrwvn(outs[0], vn);
 
 
 

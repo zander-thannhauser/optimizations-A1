@@ -1,9 +1,9 @@
 
 from stdio import printf;
 
-from lookup import vrtovn, extovn, mkvn, avrwvn, vntoex;
+from lookup import vrtovn, extovn, mkvn, avrwvn, vntoex, vrtogvn_lookup;
 
-from .process_loadI import process_loadI;
+from .process_loadI import load_literal;
 
 from .common import consider;
 
@@ -17,7 +17,7 @@ def process_sub(ops, ins, outs):
 	match (vntoex(lvn), vntoex(rvn)):
 		# constant-folding:
 		case (lex, rex) if type(lex) is int and type(rex) is int:
-			process_loadI(ops, [lex - rex], outs);
+			load_literal(ops, lex - rex, out);
 		
 		# identities:
 		# X - 0 = X
@@ -30,10 +30,17 @@ def process_sub(ops, ins, outs):
 		# substitutions:
 		# (addI X, a) - b => addI X, (a - b)
 		case (("addI", X, a), b) if type(b) is int:
-			if (b == a):
+			# check for using a move instruction's result
+			if (X != "%vr0" and X in vrtogvn_lookup.values()):
+				assert(not "TODO");
+			elif (b == a):
 				assert(not "TODO");
 			else:
 				consider(ops, ("addI", X, a - b), out);
+		
+		# a - (addI X, b) => sub (a - b), X
+		case (a, ("addI", X, b)) if type(a) is int:
+			assert(not "TODO");
 		
 		# (add X, Y) - Y => X
 		case (("add", X, Y), Z) if Y == Z:
@@ -41,7 +48,11 @@ def process_sub(ops, ins, outs):
 		
 		# (addI X, a) - (addI Y, b) => addI (sub X, Y), (+ a - b)
 		case (("addI", X, a), ("addI", Y, b)):
-			if X == Y:
+			# check for using a move instruction's result
+			if     (X != "%vr0" and X in vrtogvn_lookup.values()) \
+				or (Y != "%vr0" and Y in vrtogvn_lookup.values()):
+				assert(not "TODO");
+			elif X == Y:
 				assert(not "TODO");
 			elif a == b:
 				consider(ops, ("sub", X, Y), out);
@@ -58,15 +69,11 @@ def process_sub(ops, ins, outs):
 			consider(ops, ("addI", lvn, -c), out);
 		
 		# default:
-		case (_, _):
-			assert(not "TODO");
+		case (lex, rex):
+			# print(lex, rex);
+			# assert(not "TODO");
+			consider(ops, ("sub", lvn, rvn), out);
 	
-#		ex = ("sub", lvn, rvn);
-#		vn = extovn(ex);
-#		if not vn:
-#			vn = mkvn(ex);
-#			p.asm("sub", [lvn, rvn], "=>", [vn]);
-#		avrwvn(out, vn);
 
 
 
