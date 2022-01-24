@@ -33,5 +33,5 @@
 	  cbr_LE %vr16, %vr17 -> .L1
 	.L0:
 	  loadI .string_const_0 => %vr20
-	  iwrite %vr20
+	  swrite %vr20
 	  ret

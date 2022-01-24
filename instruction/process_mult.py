@@ -61,7 +61,7 @@ def process_mult(ops, ins, outs):
 			consider(ops, ("multI", lvn, c), out);
 		# mult c, X => multI X, c:
 		case (c, _) if type(c) is int:
-			assert(not "TODO");
+			consider(ops, ("multI", rvn, c), out);
 		
 		# default:
 		case (_, _):

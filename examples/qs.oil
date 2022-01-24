@@ -43,7 +43,7 @@
 	  call quicksort, %vr17, %vr20, %vr23
 	  call writearray
 	  ret
-	.frame readarray, 0
+	.frame readarray, 10
 	  loadI .string_const_0 => %vr4
 	  iwrite %vr4
 	# loadI 1 => %vr5
@@ -71,7 +71,7 @@
 	  cbr_LT %vr19, %vr20 -> .L1
 	.L0:
 	  ret
-	.frame writearray, 0
+	.frame writearray, 10
 	  loadI .string_const_1 => %vr4
 	  iwrite %vr4
 	# loadI 1 => %vr5
@@ -100,7 +100,7 @@
 	  cbr_LT %vr21, %vr22 -> .L3
 	.L2:
 	  ret
-	.frame partition, 0, %vr4, %vr5, %vr6
+	.frame partition, 10, %vr4, %vr5, %vr6
 	  load %vr5 => %vr7
 	  loadI 0 => %vr8
 	# loadI 4 => %vr9
@@ -210,15 +210,21 @@
 	# loadI -4 => %vr12
 	  addI %vr0, -4 => %vr13
 	  storeAI %vr11 => %vr0, -4
+	# loadI -12 => %vr14
+	# addI %vr0, -12 => %vr15
+	  storeAI %vr6 => %vr0, -12
 	  call quicksort, %vr4, %vr5, %vr13
-	# loadI -4 => %vr14
-	# addI %vr0, -4 => %vr15
-	  loadAI %vr0, -4 => %vr16
-	# loadI 1 => %vr17
-	  addI %vr16, 1 => %vr18
-	# loadI -8 => %vr19
-	  addI %vr0, -8 => %vr20
-	  storeAI %vr18 => %vr0, -8
-	  call quicksort, %vr4, %vr20, %vr6
+	# loadI -4 => %vr16
+	# addI %vr0, -4 => %vr17
+	  loadAI %vr0, -4 => %vr18
+	# loadI -12 => %vr19
+	# addI %vr0, -12 => %vr20
+	  loadAI %vr0, -12 => %vr21
+	# loadI 1 => %vr22
+	  addI %vr18, 1 => %vr23
+	# loadI -8 => %vr24
+	  addI %vr0, -8 => %vr25
+	  storeAI %vr23 => %vr0, -8
+	  call quicksort, %vr4, %vr25, %vr21
 	.L12:
 	  ret
