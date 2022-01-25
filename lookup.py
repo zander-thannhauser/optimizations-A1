@@ -32,9 +32,6 @@ def new_block_numbering():
 		gvn_vers[v] = 0;
 		vrtolvn_lookup[k] = v;
 
-def after_call():
-	new_block_numbering();
-
 def extovn(ex):
 	retval = extovn_lookup.get(ex, None);
 	printf("extosr(ex = %s) -> %s\n", ex, retval);

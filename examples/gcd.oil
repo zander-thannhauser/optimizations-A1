@@ -36,21 +36,17 @@
 	  addI %vr0, -8 => %vr22
 	  icall gcd, %vr20, %vr22 => %vr23
 	  iwrite %vr23
-	# loadI -4 => %vr24
-	  addI %vr0, -4 => %vr25
-	  iread %vr25
-	# loadI -8 => %vr26
-	  addI %vr0, -8 => %vr27
-	  iread %vr27
-	  loadAI %vr0, -4 => %vr28
-	# loadI 0 => %vr29
-	# comp %vr28, %vr29 => %vr30
-	# cmp_NE %vr28, %vr29 => %vr31
-	  loadAI %vr0, -8 => %vr32
-	# comp %vr32, %vr29 => %vr33
-	# cmp_NE %vr32, %vr29 => %vr34
-	  or %vr28, %vr32 => %vr35
-	  cbr %vr35 -> .L1
+	  iread %vr20
+	  iread %vr22
+	  loadAI %vr0, -4 => %vr24
+	# loadI 0 => %vr25
+	# comp %vr24, %vr25 => %vr26
+	# cmp_NE %vr24, %vr25 => %vr27
+	  loadAI %vr0, -8 => %vr28
+	# comp %vr28, %vr25 => %vr29
+	# cmp_NE %vr28, %vr25 => %vr30
+	  or %vr24, %vr28 => %vr31
+	  cbr %vr31 -> .L1
 	.L0:
 	  ret
 	.frame gcd, 40, %vr4, %vr5

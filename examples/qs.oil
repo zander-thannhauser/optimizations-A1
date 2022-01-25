@@ -16,11 +16,11 @@
 	  loadI main_fp => %vr4
 	  store %vr0 => %vr4
 	# loadI 0 => %vr5
-	# loadI 1 => %vr6
+	  loadI 1 => %vr6
 	  loadI -1 => %vr7
 	  i2i %vr0 => %vr8
 	# loadI -4 => %vr9
-	# addI %vr0, -4 => %vr10
+	  addI %vr0, -4 => %vr10
 	# loadI 4 => %vr11
 	  storeAI %vr7 => %vr0, -4
 	  loadI 1000 => %vr12
@@ -30,17 +30,14 @@
 	  storeAI %vr12 => %vr0, -84
 	  call readarray
 	  call writearray
-	# loadI -4 => %vr16
-	  addI %vr0, -4 => %vr17
-	  loadI 1 => %vr18
-	# loadI -88 => %vr19
-	  addI %vr0, -88 => %vr20
-	  storeAI %vr18 => %vr0, -88
-	  loadI 19 => %vr21
-	# loadI -92 => %vr22
-	  addI %vr0, -92 => %vr23
-	  storeAI %vr21 => %vr0, -92
-	  call quicksort, %vr17, %vr20, %vr23
+	# loadI -88 => %vr16
+	  addI %vr0, -88 => %vr17
+	  storeAI %vr6 => %vr0, -88
+	  loadI 19 => %vr18
+	# loadI -92 => %vr19
+	  addI %vr0, -92 => %vr20
+	  storeAI %vr18 => %vr0, -92
+	  call quicksort, %vr10, %vr17, %vr20
 	  call writearray
 	  ret
 	.frame readarray, 10
@@ -214,17 +211,11 @@
 	# addI %vr0, -12 => %vr15
 	  storeAI %vr6 => %vr0, -12
 	  call quicksort, %vr4, %vr5, %vr13
-	# loadI -4 => %vr16
-	# addI %vr0, -4 => %vr17
-	  loadAI %vr0, -4 => %vr18
-	# loadI -12 => %vr19
-	# addI %vr0, -12 => %vr20
-	  loadAI %vr0, -12 => %vr21
-	# loadI 1 => %vr22
-	  addI %vr18, 1 => %vr23
-	# loadI -8 => %vr24
-	  addI %vr0, -8 => %vr25
-	  storeAI %vr23 => %vr0, -8
-	  call quicksort, %vr4, %vr25, %vr21
+	# loadI 1 => %vr16
+	  addI %vr11, 1 => %vr17
+	# loadI -8 => %vr18
+	  addI %vr0, -8 => %vr19
+	  storeAI %vr17 => %vr0, -8
+	  call quicksort, %vr4, %vr19, %vr6
 	.L12:
 	  ret
