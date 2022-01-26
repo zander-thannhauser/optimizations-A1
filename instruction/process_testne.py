@@ -19,9 +19,12 @@ def process_testne(ops, ins, outs):
 		
 		# substitutions:
 		case ("comp", X, Y):
-			# check for using a move instruction's result
 			if oldgvn(X) or oldgvn(Y):
 				assert(not "TODO");
+			elif vntoex(X) == 0:
+				assert(not "TODO");
+			elif vntoex(Y) == 0:
+				avrwvn(out, X);
 			else:
 				consider(ops, ("cmp_NE", X, Y), out);
 		

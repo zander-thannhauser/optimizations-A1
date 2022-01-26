@@ -21,6 +21,10 @@ def process_testeq(ops, ins, outs):
 			# check for using a move instruction's result
 			if oldgvn(X) or oldgvn(Y):
 				assert(not "TODO");
+			elif vntoex(X) == 0:
+				assert(not "TODO");
+			elif vntoex(Y) == 0:
+				consider(ops, ("not", X), out);
 			else:
 				consider(ops, ("cmp_EQ", X, Y), out);
 		

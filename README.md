@@ -4,14 +4,14 @@
 ## Carr's Numbers:
 | File             | Original | Opt.Time |      Carr's LVN |    Opt. # Inst. |
 |  :--             |      --: |      --: |            --:  |             --: |
-| `arrayparam.il`  |      841 | 0m0.072s |   487 (172.69%) |   375 (224.27%) |
+| `arrayparam.il`  |      841 | 0m0.072s |   487 (172.69%) |   374 (224.27%) |
 | `bubble.il`      |     4374 | 0m0.076s |  2855 (153.20%) |  1444 (302.91%) |
 | `check.il`       |      140 | 0m0.031s |   130 (107.69%) |    64 (218.75%) |
-| `dynamic.il`     |    39155 | 0m0.063s | 23579 (166.06%) | 12853 (304.64%) |
+| `dynamic.il`     |    39155 | 0m0.063s | 23579 (166.06%) | 12821 (304.64%) |
 | `fib.il`         |      274 | 0m0.032s |   252 (108.73%) |   186 (147.31%) |
-| `gcd.il`         |      103 | 0m0.070s |    83 (124.10%) |    57 (174.58%) |
+| `gcd.il`         |      103 | 0m0.070s |    83 (124.10%) |    52 (174.58%) |
 | `newdyn.il`      |   136919 | 0m0.078s | 82256 (166.45%) | 44586 (307.09%) |
-| `qs.il`          |     4574 | 0m0.057s |  3468 (131.89%) |   624 (197.84%) |
+| `qs.il`          |     4574 | 0m0.057s |  3468 (131.89%) |  2240 (197.84%) |
 | `while_array.il` |      377 | 0m0.036s |   315 (119.68%) |   165 (228.48%) |
 
 # Dependencies
@@ -27,6 +27,7 @@ The git repo is here: `https://github.com/zander-thannhauser/Iloc-interpreter.gi
 you should be able to build it by running:
 
 ```
+struct apt install gcc-multilib make gcc findutils
 git clone https://github.com/zander-thannhauser/Iloc-interpreter.git
 cd Iloc-interpreter
 make

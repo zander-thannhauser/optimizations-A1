@@ -9,7 +9,7 @@
 	   .string  .string_rformat, "%s"
 	   .global          main_fp, 4, 4
 .text
-	.frame main, 80
+	.frame main, 12
 	  loadI main_fp => %vr4
 	  store %vr0 => %vr4
 	# loadI -4 => %vr5
@@ -19,42 +19,38 @@
 	  addI %vr0, -8 => %vr8
 	  iread %vr8
 	  loadAI %vr0, -4 => %vr9
-	  loadI 0 => %vr10
+	# loadI 0 => %vr10
 	# comp %vr9, %vr10 => %vr11
-	# cmp_NE %vr9, %vr10 => %vr12
-	  loadAI %vr0, -8 => %vr13
-	# comp %vr13, %vr10 => %vr14
-	# cmp_NE %vr13, %vr10 => %vr15
-	  or %vr9, %vr13 => %vr16
-	# comp %vr16, %vr10 => %vr17
-	# cmp_EQ %vr16, %vr10 => %vr18
-	  cbr_EQ %vr16, %vr10 -> .L0
+	  loadAI %vr0, -8 => %vr12
+	# comp %vr12, %vr10 => %vr13
+	  or %vr9, %vr12 => %vr14
+	# comp %vr14, %vr10 => %vr15
+	# not %vr14 => %vr16
+	  cbrne %vr14 -> .L0
 	.L1:
-	# loadI -4 => %vr19
-	  addI %vr0, -4 => %vr20
-	# loadI -8 => %vr21
-	  addI %vr0, -8 => %vr22
-	  icall gcd, %vr20, %vr22 => %vr23
-	  iwrite %vr23
+	# loadI -4 => %vr17
+	  addI %vr0, -4 => %vr18
+	# loadI -8 => %vr19
+	  addI %vr0, -8 => %vr20
+	  icall gcd, %vr18, %vr20 => %vr21
+	  iwrite %vr21
+	  iread %vr18
 	  iread %vr20
-	  iread %vr22
-	  loadAI %vr0, -4 => %vr24
-	# loadI 0 => %vr25
-	# comp %vr24, %vr25 => %vr26
-	# cmp_NE %vr24, %vr25 => %vr27
-	  loadAI %vr0, -8 => %vr28
-	# comp %vr28, %vr25 => %vr29
-	# cmp_NE %vr28, %vr25 => %vr30
-	  or %vr24, %vr28 => %vr31
-	  cbr %vr31 -> .L1
+	  loadAI %vr0, -4 => %vr22
+	# loadI 0 => %vr23
+	# comp %vr22, %vr23 => %vr24
+	  loadAI %vr0, -8 => %vr25
+	# comp %vr25, %vr23 => %vr26
+	  or %vr22, %vr25 => %vr27
+	  cbr %vr27 -> .L1
 	.L0:
 	  ret
-	.frame gcd, 40, %vr4, %vr5
+	.frame gcd, 8, %vr4, %vr5
 	  load %vr5 => %vr6
-	  loadI 0 => %vr7
+	# loadI 0 => %vr7
 	# comp %vr6, %vr7 => %vr8
-	# cmp_EQ %vr6, %vr7 => %vr9
-	  cbr_NE %vr6, %vr7 -> .L2
+	# not %vr6 => %vr9
+	  cbr %vr6 -> .L2
 	  load %vr4 => %vr10
 	  iret %vr10
 	  jumpI -> .L3

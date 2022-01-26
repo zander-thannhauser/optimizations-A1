@@ -1,5 +1,5 @@
 # vim: set noai ts=8 sw=8:
-	.data
+.data
 	.string	.int_wformat, "%d\12"
 	.string	.float_wformat, "%f\12"
 	.string	.char_wformat, "%c\12"
@@ -9,7 +9,7 @@
 	.string	.char_rformat, "%c"
 	.string	.string_rformat, "%s"
 	.text
-	.frame	main, 60
+	.frame	main, 64
 	loadI	32  => %vr8
 	loadI	1  => %vr9
 	i2i	%vr0  => %vr10

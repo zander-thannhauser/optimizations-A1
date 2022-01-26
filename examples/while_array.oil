@@ -8,7 +8,7 @@
 	   .string    .char_rformat, "%c"
 	   .string  .string_rformat, "%s"
 .text
-	.frame main, 40
+	.frame main, 44
 	# loadI 1 => %vr4
 	  loadI 1 => %vr5
 	# loadI 10 => %vr6

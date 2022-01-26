@@ -41,6 +41,26 @@ def process_cbrne(ops, ins, outs):
 		case ("testlt", X): assert(not "TODO");
 		case ("testle", X): assert(not "TODO");
 		
+		case ("and", X, Y):
+			assert(not "TODO");
+		
+		case ("or", X, Y):
+			assert(not "TODO");
+		
+		case ("not", X) if not oldgvn(X):
+			ops.append(("cbr", [X], "->", [out]));
+		
 		case _:
 			assert(not "TODO");
 	
+
+
+
+
+
+
+
+
+
+
+
