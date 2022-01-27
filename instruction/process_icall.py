@@ -10,5 +10,7 @@ def process_icall(ops, ins, outs):
 	
 	ops.append(("icall", [ins[0]] + [vrtovn(i) for i in ins[1:]], "=>", [new]));
 	
+	after_call();
+	
 	avrwvn(out, new);
 	

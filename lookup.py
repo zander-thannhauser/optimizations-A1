@@ -26,11 +26,18 @@ def new_block_numbering():
 	extovn_lookup.clear();
 	vntoex_lookup.clear();
 	pextovn_lookup.clear();
-	vrtolvn_lookup.clear()
+	vrtolvn_lookup.clear();
 	gvn_vers.clear();
 	for k, v in vrtogvn_lookup.items():
 		gvn_vers[v] = 0;
 		vrtolvn_lookup[k] = v;
+
+def after_call():
+	# other function calls won't screw up our registers,
+	# but they can still screw up our memory model and our globals:
+	pextovn_lookup.clear();
+	for k in gvn_vers:
+		gvn_vers[k] += 1;
 
 def extovn(ex):
 	retval = extovn_lookup.get(ex, None);
