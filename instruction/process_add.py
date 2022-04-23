@@ -35,18 +35,25 @@ def process_add(ops, ins, outs):
 				assert(not "TODO");
 			else:
 				assert(not "TODO");
+		
 		# a + (addI X, b) => addI X, (a + b)
 		case (a, ("addI", X, b)) if type(a) is int:
 			# check for using a move instruction's result
-			assert(not "TODO");
+			if oldgvn(X):
+				consider(ops, ("addI", rvn, a), out);
+			else:
+				consider(ops, ("addI", X, a + b), out);
+		
 		# (sub X, Y) + Y => X
 		case (("sub", X, Y), Z) if Y == Z:
 			# check for using a move instruction's result
 			assert(not "TODO");
+		
 		# X + (sub Y, X) => Y
 		case (X, ("sub", Y, Z)) if Z == Z:
 			# check for using a move instruction's result
 			assert(not "TODO");
+		
 		# (addI X, a) + (addI, Y, b) => addI (add X, Y), (a + b)
 		case (("addI", X, a), ("addI", Y, b)):
 			# check for using a move instruction's result

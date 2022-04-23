@@ -66,6 +66,7 @@ from instruction.process_iread    import process_iread;
 from instruction.process_fwrite   import process_fwrite;
 from instruction.process_iwrite   import process_iwrite;
 from instruction.process_swrite   import process_swrite;
+from instruction.process_putchar  import process_putchar;
 
 # Branch Instructions:
 from instruction.process_jumpI    import process_jumpI;
@@ -151,6 +152,7 @@ lookup = {
 	"fwrite": process_fwrite,
 	"iwrite": process_iwrite,
 	"swrite": process_swrite,
+	"putchar": process_putchar,
 	
 	# Branch Instructions:
 	"jumpI": process_jumpI,
@@ -194,7 +196,7 @@ def process_block(t, p):
 				t.next();
 				ins.append(t.token);
 				t.next();
-		if operation not in ["ret", "nop", "iwrite", "fwrite", "swrite", "iread", "iret", "call"]:
+		if operation not in ["ret", "nop", "iwrite", "fwrite", "swrite", "iread", "iret", "call", "putchar"]:
 			# printf("t.token == \"%s\"\n", t.token);
 			assert(t.token in ["->", "=>"]);
 			t.next();

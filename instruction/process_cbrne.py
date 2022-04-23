@@ -10,6 +10,10 @@ def process_cbrne(ops, ins, outs):
 	
 	match (vntoex(ivn)):
 		
+		# constant-folding:
+		case c if type(c) is int:
+			if not c: process_jumpI(ops, [], outs);
+		
 		case ("cmp_LT", X, Y):
 			# check for using a move instruction's result
 			if oldgvn(X) or oldgvn(Y):
@@ -19,7 +23,13 @@ def process_cbrne(ops, ins, outs):
 		
 		case ("cmp_LE", X, Y): assert(not "TODO");
 		case ("cmp_GT", X, Y): assert(not "TODO");
-		case ("cmp_GE", X, Y): assert(not "TODO");
+		case ("cmp_GE", X, Y):
+			# check for using a move instruction's result
+			if oldgvn(X) or oldgvn(Y):
+				assert(not "TODO");
+			else:
+				ops.append(("cbr_LT", [X, Y], "->", [out]));
+		
 		case ("cmp_EQ", X, Y):
 			# check for using a move instruction's result
 			if oldgvn(X) or oldgvn(Y):
@@ -50,7 +60,8 @@ def process_cbrne(ops, ins, outs):
 		case ("not", X) if not oldgvn(X):
 			ops.append(("cbr", [X], "->", [out]));
 		
-		case _:
+		case exp:
+			print(f"exp = {exp}")
 			assert(not "TODO");
 	
 

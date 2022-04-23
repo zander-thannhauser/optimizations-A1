@@ -1,40 +1,34 @@
-# vim: set noai ts=8 sw=8:
-	.data
-	.string	.int_wformat, "%d\12"
-	.string	.float_wformat, "%f\12"
-	.string	.char_wformat, "%c\12"
-	.string	.string_wformat, "%s\12"
-	.string	.int_rformat, "%d"
-	.string	.float_rformat, "%f"
-	.string	.char_rformat, "%c"
-	.string	.string_rformat, "%s"
-	.string	.string_const_0, "SUCCESS"
-	.text
-	.frame	main, 0
-	loadI	1  => %vr6
-	i2i	%vr6  => %vr4
-	loadI	10  => %vr7
-	comp	%vr4, %vr7 => %vr8
-	testgt	%vr8  => %vr9
-	cbr	%vr9  -> .L0
-.L1:	nop
-	loadI	0  => %vr10
-	comp	%vr4, %vr10 => %vr11
-	testlt	%vr11  => %vr12
-	cbrne	%vr12  -> .L2
-	loadI	10  => %vr7
-	loadI	0  => %vr10
-	mod	%vr7, %vr10 => %vr13
-	i2i	%vr13  => %vr5
-.L2:	nop
-	loadI	1  => %vr6
-	add	%vr4, %vr6 => %vr14
-	i2i	%vr14  => %vr4
-	loadI	10  => %vr7
-	comp	%vr4, %vr7 => %vr8
-	testle	%vr8  => %vr9
-	cbr	%vr9  -> .L1
-.L0:	nop
-	loadI	.string_const_0  => %vr15
-	swrite	%vr15
-	ret
+.data
+    .string .str_const_0, "SUCCESS"
+.text
+.frame main, 12 
+    loadI 1 => %vr1
+    i2i %vr1 => %vr2
+    loadI 0 => %vr3
+    i2i %vr3 => %vr4
+    loadI 10 => %vr5
+    i2i %vr5 => %vr6
+    loadI 10 => %vr5
+    comp %vr2, %vr5 => %vr7
+    testgt %vr7 => %vr8
+    cbr %vr8 -> .L1
+.L0: nop
+    loadI 0 => %vr3
+    comp %vr2, %vr3 => %vr9
+    testge %vr9 => %vr10
+    cbr %vr10 -> .L3
+    loadI 1 => %vr1
+    mod %vr6, %vr1 => %vr11
+    i2i %vr11 => %vr4
+.L3: nop
+    loadI 1 => %vr1
+    add %vr2, %vr1 => %vr12
+    i2i %vr12 => %vr2
+    loadI 10 => %vr5
+    comp %vr2, %vr5 => %vr7
+    testgt %vr7 => %vr8
+    cbrne %vr8 -> .L0
+.L1: nop
+    loadI .str_const_0 => %vr13
+    swrite %vr13
+    ret

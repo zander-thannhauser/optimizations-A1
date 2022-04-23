@@ -1,0 +1,46 @@
+.data
+.text
+	.frame merge, 4, %vr4, %vr5
+	  loadI 1 => %vr6
+	  loadI 1 => %vr7
+	  loadI 3 => %vr8
+	# comp %vr4, %vr8 => %vr9
+	# cmp_LE %vr4, %vr8 => %vr10
+	  cbr_LE %vr4, %vr8 -> .L0
+	# comp %vr5, %vr8 => %vr11
+	# cmp_GE %vr5, %vr8 => %vr12
+	  cbr_GE %vr5, %vr8 -> .L2
+	  iwrite %vr6
+	  jumpI -> .L3
+	.L2:
+	# loadI 3 => %vr13
+	  loadI 3 => %vr7
+	  jumpI -> .L3
+	.L4:
+	.L3:
+	  iwrite %vr7
+	  jumpI -> .L1
+	.L0:
+	  loadI 3 => %vr14
+	# comp %vr5, %vr14 => %vr15
+	# cmp_GE %vr5, %vr14 => %vr16
+	  cbr_GE %vr5, %vr14 -> .L6
+	# loadI 2 => %vr17
+	  loadI 2 => %vr7
+	  jumpI -> .L7
+	.L6:
+	# loadI 3 => %vr18
+	  loadI 3 => %vr7
+	  jumpI -> .L7
+	.L8:
+	.L7:
+	  iwrite %vr7
+	  jumpI -> .L1
+	.L5:
+	.L1:
+	  ret
+	.frame main, 0
+	  loadI 4 => %vr4
+	  loadI 5 => %vr5
+	  call merge, %vr4, %vr5
+	  ret

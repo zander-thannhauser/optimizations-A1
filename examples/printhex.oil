@@ -1,0 +1,44 @@
+.data
+.text
+	.frame printhex_recursive, 4, %vr4
+	  loadI 16 => %vr5
+	# mod %vr4, %vr5 => %vr6
+	  mod %vr4, %vr5 => %vr7
+	# comp %vr4, %vr5 => %vr8
+	# cmp_LT %vr4, %vr5 => %vr9
+	  cbr_LT %vr4, %vr5 -> .L1
+	  loadI 4 => %vr10
+	  rshift %vr4, %vr10 => %vr11
+	  call printhex_recursive, %vr11
+	.L1:
+	  loadI 10 => %vr12
+	# comp %vr7, %vr12 => %vr13
+	# cmp_GE %vr7, %vr12 => %vr14
+	  cbr_GE %vr7, %vr12 -> .L2
+	# loadI 48 => %vr15
+	  addI %vr7, 48 => %vr16
+	  putchar %vr16
+	  jumpI -> .L3
+	.L2:
+	# loadI 65 => %vr17
+	# loadI 10 => %vr18
+	# addI %vr7, -10 => %vr19
+	  addI %vr7, 55 => %vr20
+	  putchar %vr20
+	  jumpI -> .L3
+	.L4:
+	.L3:
+	  ret
+	.frame printhex, 0, %vr4
+	  call printhex_recursive, %vr4
+	  loadI 10 => %vr5
+	  putchar %vr5
+	  ret
+	.frame main, 4
+	  loadI 0 => %vr4
+	  i2i %vr4 => %vr5
+	  i2i %vr0 => %vr6
+	  store %vr4 => %vr0
+	  iread %vr0
+	  call printhex, %vr7
+	  ret

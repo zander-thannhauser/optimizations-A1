@@ -42,12 +42,16 @@ def process_mult(ops, ins, outs):
 			else:
 				subvn = consider(ops, ("multI", X, b));
 				consider(ops, ("addI", subvn, a * b), out);
+		
 		# a * (addI X, b) => addI (multI X, a), (a * b)
 		case (a, ("addI", X, b)) if type(a) is int:
-			assert(not "TODO");
+			subvn = consider(ops, ("multI", X, b));
+			consider(ops, ("addI", subvn, a * b), out);
+		
 		# (multI X, a) * b => multI X, (a * b)
 		case (("multI", X, a), b) if type(b) is int:
 			assert(not "TODO");
+		
 		# a * (multI X, b) => multI X, (a * b)
 		case (a, ("multI", X, b)) if type(a) is int:
 			assert(not "TODO");

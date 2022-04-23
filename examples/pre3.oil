@@ -1,0 +1,26 @@
+.data
+.text
+	.frame pre_example, 4, %vr4, %vr5
+	  loadI 0 => %vr6
+	  i2i %vr6 => %vr7
+	# loadI 5 => %vr8
+	# loadI -1 => %vr9
+	.L0:
+	# loadI 7 => %vr10
+	# addI %vr4, 7 => %vr11
+	  addI %vr4, 7 => %vr5
+	# loadI 1 => %vr12
+	  addI %vr7, 1 => %vr13
+	  addI %vr7, 1 => %vr7
+	  loadI 5 => %vr14
+	# comp %vr13, %vr14 => %vr15
+	# cmp_GE %vr13, %vr14 => %vr16
+	  cbr_LT %vr13, %vr14 -> .L0
+	.L1:
+	  iwrite %vr5
+	  ret
+	.frame main, 0
+	  loadI 3 => %vr4
+	  loadI 2 => %vr5
+	  call pre_example, %vr4, %vr5
+	  ret

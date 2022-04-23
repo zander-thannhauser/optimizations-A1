@@ -1,94 +1,69 @@
-# vim: set noai ts=8 sw=8:
 .data
-	.string	.int_wformat, "%d\12"
-	.string	.float_wformat, "%f\12"
-	.string	.char_wformat, "%c\12"
-	.string	.string_wformat, "%s\12"
-	.string	.int_rformat, "%d"
-	.string	.float_rformat, "%f"
-	.string	.char_rformat, "%c"
-	.string	.string_rformat, "%s"
-	.global	main_fp, 4, 4
-	.text
-	.frame	main, 12
-	loadI	main_fp  => %vr4
-	store	%vr0  => %vr4
-	loadI	-4  => %vr5
-	add	%vr0, %vr5 => %vr6
-	iread	%vr6
-	loadI	-8  => %vr7
-	add	%vr0, %vr7 => %vr8
-	iread	%vr8
-	loadI	-4  => %vr5
-	add	%vr0, %vr5 => %vr6
-	load	%vr6  => %vr9
-	loadI	0  => %vr10
-	comp	%vr9, %vr10 => %vr11
-	testne	%vr11  => %vr12
-	loadI	-8  => %vr7
-	add	%vr0, %vr7 => %vr8
-	load	%vr8  => %vr13
-	loadI	0  => %vr10
-	comp	%vr13, %vr10 => %vr14
-	testne	%vr14  => %vr15
-	or	%vr12, %vr15 => %vr16
-	loadI	0  => %vr10
-	comp	%vr16, %vr10 => %vr17
-	testeq	%vr17  => %vr18
-	cbr	%vr18  -> .L0
-.L1:	nop
-	loadI	-4  => %vr5
-	add	%vr0, %vr5 => %vr6
-	loadI	-8  => %vr7
-	add	%vr0, %vr7 => %vr8
-	icall	gcd, %vr6, %vr8 	 => %vr19
-	iwrite	%vr19
-	loadI	-4  => %vr5
-	add	%vr0, %vr5 => %vr6
-	iread	%vr6
-	loadI	-8  => %vr7
-	add	%vr0, %vr7 => %vr8
-	iread	%vr8
-	loadI	-4  => %vr5
-	add	%vr0, %vr5 => %vr6
-	load	%vr6  => %vr9
-	loadI	0  => %vr10
-	comp	%vr9, %vr10 => %vr11
-	testne	%vr11  => %vr12
-	loadI	-8  => %vr7
-	add	%vr0, %vr7 => %vr8
-	load	%vr8  => %vr13
-	loadI	0  => %vr10
-	comp	%vr13, %vr10 => %vr14
-	testne	%vr14  => %vr15
-	or	%vr12, %vr15 => %vr16
-	cbr	%vr16  -> .L1
-.L0:	nop
-	ret
-	.frame	gcd, 8, %vr4, %vr5
-	load	%vr5  => %vr6
-	loadI	0  => %vr7
-	comp	%vr6, %vr7 => %vr8
-	testeq	%vr8  => %vr9
-	cbrne	%vr9  -> .L2
-	load	%vr4  => %vr10
-	iret	%vr10
-	jumpI	-> .L3
-.L2:	nop
-	load	%vr4  => %vr10
-	load	%vr5  => %vr6
-	mod	%vr10, %vr6 => %vr11
-	loadI	-4  => %vr12
-	add	%vr0, %vr12 => %vr13
-	store	%vr11  => %vr13
-	icall	gcd, %vr5, %vr13 	 => %vr14
-	iret	%vr14
-.L3:	nop
-	ret
 
-
-
-
-
-
-
+.text
+.frame gcd, 0, %vr1, %vr2
+    loadI 0 => %vr3
+    comp %vr2, %vr3 => %vr4
+    testne %vr4 => %vr5
+    cbr %vr5 -> .L0
+    iret %vr1
+    jumpI -> .L1
+.L0: nop
+    mod %vr1, %vr2 => %vr6
+    icall gcd, %vr2, %vr6 => %vr7
+    iret %vr7
+.L1: nop
+.frame main, 8 
+    loadI 0 => %vr3
+    i2i %vr3 => %vr8
+    loadI 0 => %vr3
+    i2i %vr3 => %vr9
+    i2i %vr0 => %vr10
+    loadI 0 => %vr3
+    sub %vr10, %vr3 => %vr11
+    store %vr8 => %vr11
+    iread %vr11
+    i2i %vr0 => %vr10
+    loadI 4 => %vr12
+    sub %vr10, %vr12 => %vr13
+    store %vr9 => %vr13
+    iread %vr13
+    load %vr11 => %vr14
+    loadI 0 => %vr3
+    comp %vr14, %vr3 => %vr15
+    testeq %vr15 => %vr16
+    load %vr13 => %vr17
+    loadI 0 => %vr3
+    comp %vr17, %vr3 => %vr18
+    testeq %vr18 => %vr19
+    or %vr16, %vr19 => %vr20
+    cbr %vr20 -> .L3
+.L2: nop
+    load %vr11 => %vr14
+    load %vr13 => %vr17
+    icall gcd, %vr14, %vr17 => %vr7
+    iwrite %vr7
+    load %vr11 => %vr14
+    i2i %vr0 => %vr10
+    loadI 0 => %vr3
+    sub %vr10, %vr3 => %vr11
+    store %vr14 => %vr11
+    iread %vr11
+    load %vr13 => %vr17
+    i2i %vr0 => %vr10
+    loadI 4 => %vr12
+    sub %vr10, %vr12 => %vr13
+    store %vr17 => %vr13
+    iread %vr13
+    load %vr11 => %vr14
+    loadI 0 => %vr3
+    comp %vr14, %vr3 => %vr15
+    testeq %vr15 => %vr16
+    load %vr13 => %vr17
+    loadI 0 => %vr3
+    comp %vr17, %vr3 => %vr18
+    testeq %vr18 => %vr19
+    or %vr16, %vr19 => %vr20
+    cbrne %vr20 -> .L2
+.L3: nop
+    ret

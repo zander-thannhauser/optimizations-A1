@@ -1,0 +1,24 @@
+.data
+.text
+	.frame main, 4
+	  loadI 0 => %vr4
+	  i2i %vr4 => %vr5
+	# loadI 7 => %vr6
+	# loadI 5 => %vr7
+	  loadI 2 => %vr8
+	  iwrite %vr8
+	# loadI 10 => %vr9
+	# loadI -1 => %vr10
+	.L0:
+	# loadI 2 => %vr11
+	# loadI 1 => %vr12
+	# addI %vr5, 1 => %vr13
+	  multI %vr5, 1 => %vr14
+	  addI %vr14, 2 => %vr15
+	  sub %vr15, %vr5 => %vr16
+	  iwrite %vr16
+	# loadI 10 => %vr17
+	  loadI 10 => %vr5
+	# loadI 0 => %vr18
+	.L1:
+	  ret

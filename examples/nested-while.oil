@@ -1,0 +1,49 @@
+.data
+.text
+	.frame main, 12
+	  loadI 0 => %vr4
+	  i2i %vr4 => %vr5
+	# loadI 7 => %vr6
+	# loadI 5 => %vr7
+	  loadI 2 => %vr8
+	  iwrite %vr8
+	# loadI 10 => %vr9
+	# loadI -1 => %vr10
+	.L0:
+	  loadI 0 => %vr11
+	  i2i %vr11 => %vr12
+	# loadI 1 => %vr13
+	  loadI 2 => %vr14
+	  iwrite %vr14
+	# loadI 20 => %vr15
+	# loadI -1 => %vr16
+	.L2:
+	# loadI 1 => %vr17
+	# addI %vr12, 1 => %vr18
+	  addI %vr12, 1 => %vr19
+	# loadI 2 => %vr20
+	  multI %vr12, 2 => %vr21
+	# loadI 3 => %vr22
+	# addI %vr21, 3 => %vr23
+	  sub %vr21, %vr12 => %vr24
+	  addI %vr24, 2 => %vr25
+	  iwrite %vr25
+	# loadI 512 => %vr26
+	  loadI 512 => %vr12
+	# loadI 20 => %vr27
+	.L3:
+	# loadI 2 => %vr28
+	  loadI 1 => %vr29
+	# addI %vr5, 1 => %vr30
+	  multI %vr5, 1 => %vr31
+	  addI %vr31, 2 => %vr32
+	  sub %vr32, %vr5 => %vr33
+	  iwrite %vr33
+	  rshift %vr12, %vr29 => %vr34
+	  rshift %vr12, %vr29 => %vr5
+	  loadI 10 => %vr35
+	# comp %vr34, %vr35 => %vr36
+	# cmp_GE %vr34, %vr35 => %vr37
+	  cbr_LT %vr34, %vr35 -> .L0
+	.L1:
+	  ret
