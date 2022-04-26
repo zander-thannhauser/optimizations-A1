@@ -1,7 +1,7 @@
 
 from lookup import vrtovn, vntoex, extovn, mkvn, avrwvn, oldgvn;
 
-from .process_loadI import process_loadI;
+from .process_loadI import load_literal;
 
 from .common import consider;
 

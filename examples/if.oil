@@ -1,0 +1,21 @@
+.data
+.text
+	.frame main, 12
+	  loadI 0 => %vr4
+	  i2i %vr4 => %vr2
+	# loadI 5 => %vr5
+	  loadI 5 => %vr6
+	# loadI 3 => %vr7
+	  loadI 3 => %vr8
+	# loadI 1 => %vr9
+	# loadI 8 => %vr10
+	  loadI 8 => %vr2
+	  jumpI -> .L1
+	.L0:
+	# add %vr6, %vr8 => %vr11
+	  add %vr6, %vr8 => %vr2
+	.L1:
+	  add %vr6, %vr8 => %vr12
+	  add %vr6, %vr8 => %vr2
+	  iwrite %vr12
+	  ret
